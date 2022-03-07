@@ -6,15 +6,20 @@ type Background = {
 
 export type Icon = {
   default: ColorValue;
+  gray: ColorValue;
 };
 export type Text = {
   default: ColorValue;
+  gray: ColorValue;
+  link: ColorValue;
 };
 type Button = {
   background: {
     default: ColorValue;
+    action: ColorValue;
   };
   text: {
+    action: ColorValue;
     default: ColorValue;
   };
 };
