@@ -3,6 +3,7 @@ import {themeActions} from '@/bus/theme';
 import {apiTheme} from '@/bus/theme/api';
 import {SagaIterator} from 'redux-saga';
 import {call, put} from 'redux-saga/effects';
+import {types} from '../../types';
 
 export function* fetchTheme(): SagaIterator {
   try {
@@ -13,5 +14,7 @@ export function* fetchTheme(): SagaIterator {
     }
   } catch (e) {
     console.log(`error fetch theme ${e}`);
+  } finally {
+    yield put({type: types.END_FETCH_THEME});
   }
 }

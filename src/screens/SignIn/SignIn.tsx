@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
-import {View, ScrollView, TouchableOpacity} from 'react-native';
+import {View, ScrollView, TouchableOpacity, SafeAreaView} from 'react-native';
 import {useData} from './useData';
 import {useStyles} from './useStyles';
 
-import {Button, Text} from '../../components';
+import {Button, Text, FilledField} from '@/components';
 import {Controller} from 'react-hook-form';
-import {FilledField} from '../../components/Core/FilledField';
 // import { AuthStackParamList } from '../../navigation/AuthNavigator';
 // import { Routes } from '../../navigation';
 // import { StackScreenProps } from '@react-navigation/stack';
@@ -13,5 +12,15 @@ import {FilledField} from '../../components/Core/FilledField';
 // import { Loader } from '../../components';
 // import { useToken } from '../../hooks';
 export const SignIn = () => {
-  return null;
+  const {styles} = useStyles();
+  const {} = useData();
+  return (
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.container}>
+        <FilledField margin={{top: 12}} />
+        <FilledField margin={{top: 12}} />
+        <Button margin={{top: 12}}>Війти</Button>
+      </View>
+    </SafeAreaView>
+  );
 };
