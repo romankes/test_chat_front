@@ -2,29 +2,25 @@ import type {Pallete} from './types';
 
 const pallete: Pallete = {
   background: {
-    default: '#fff'
+    initial: '#fff',
+    sendMessage: '#272643',
   },
   text: {
-    default: '#fff'
-
+    default: '#000',
   },
   icon: {
-    default: '#fff'
-
+    default: '#fff',
   },
   button: {
     background: {
-      default: '#fff'
-
+      default: '#fff',
     },
     text: {
-      default: '#fff'
-      ,
+      default: '#fff',
     },
   },
   border: {
-    default: '#fff'
-
+    default: '#fff',
   },
 };
 
