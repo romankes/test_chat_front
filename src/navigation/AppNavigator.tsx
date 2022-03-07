@@ -6,13 +6,12 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Routes} from './Routes';
 
 import {AuthNavigator} from './AuthNavigator';
-import {TabNavigator} from './TabNavigator';
-import {useToken} from '../hooks';
+// import {TabNavigator} from './TabNavigator';
 import {Loader} from '../components/Core/Loader';
 
 export type AppStackParamList = {
-  [Routes.AUTH_NAVIGATOR]: undefined;
-  [Routes.TAB_NAVIGATOR]: undefined;
+  [Routes.AUTH]: undefined;
+  [Routes.TABS]: undefined;
 };
 
 const AppStack = createStackNavigator<AppStackParamList>();
@@ -24,11 +23,8 @@ export const AppNavigator: FC = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        <AppStack.Screen
-          name={Routes.AUTH_NAVIGATOR}
-          component={AuthNavigator}
-        />
-        <AppStack.Screen name={Routes.TAB_NAVIGATOR} component={TabNavigator} />
+        <AppStack.Screen name={Routes.AUTH} component={AuthNavigator} />
+        {/* <AppStack.Screen name={Routes.TABS} component={TabNavigator} /> */}
       </AppStack.Navigator>
     </NavigationContainer>
   );

@@ -12,3 +12,6 @@ import {FilledField} from '../../components/Core/FilledField';
 // import { FC } from 'hoist-non-react-statics/node_modules/@types/react';
 // import { Loader } from '../../components';
 // import { useToken } from '../../hooks';
+export const SignIn = () => {
+  return null;
+};

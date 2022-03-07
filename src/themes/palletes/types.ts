@@ -1,8 +1,7 @@
 import {ColorValue} from 'react-native';
 
 type Background = {
-  sendMessage: ColorValue;
-  initial: ColorValue;
+  default: ColorValue;
 };
 
 export type Icon = {
