@@ -1,31 +1,26 @@
 import {ColorValue} from 'react-native';
 
 type Background = {
-default: ColorValue
-};
-
-export type Text = {
-  default: ColorValue
+  sendMessage: ColorValue;
+  initial: ColorValue;
 };
 
 export type Icon = {
-  default: ColorValue
-
+  default: ColorValue;
 };
-
+export type Text = {
+  default: ColorValue;
+};
 type Button = {
   background: {
-    default: ColorValue
-
+    default: ColorValue;
   };
   text: {
-    default: ColorValue
-
+    default: ColorValue;
   };
 };
 type Border = {
-  default: ColorValue
-
+  default: ColorValue;
 };
 
 export type ButtonKeysIcon = keyof Button['background'];
