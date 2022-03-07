@@ -4,6 +4,9 @@ import {Theme} from './namespace';
 export enum types {
   FETCH_THEME = 'THEME/FETCH_THEME',
   CHANGE_THEME = 'THEME/CHANGE_THEME',
+
+  END_CHANGE_THEME = 'THEME/END_CHANGE_THEME',
+  END_FETCH_THEME = 'THEME/END_FETCH_THEME',
 }
 
 export type ThemeState = {

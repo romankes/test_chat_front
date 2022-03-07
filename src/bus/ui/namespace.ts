@@ -1,20 +1,5 @@
 export namespace Ui {
-  export type FormName =
-    | 'water_list'
-    | 'pizza_list'
-    | 'sign_in'
-    | 'sign_up'
-    | 'user'
-    | 'order'
-    | 'logout'
-    | 'ingredient'
-    | 'cart'
-    | 'rate'
-    | 'custom_pizza'
-    | 'update_token'
-    | 'filter'
-    | 'settings'
-    | 'configuration';
+  export type FormName = 'logout' | 'sign_in' | 'sign_up';
 
   export type Loader = {
     name: FormName;

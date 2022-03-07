@@ -13,9 +13,6 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config: any) => {
     const token = (await AsyncStorage.getItem('TOKEN')) || '';
-
-    const lang = await AsyncStorage.getItem('LANGUAGE');
-
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

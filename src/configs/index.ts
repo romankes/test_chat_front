@@ -1,1 +1,1 @@
-export const _apiBase = 'https://api.pizza.black/api';
+export const _apiBase = '';
