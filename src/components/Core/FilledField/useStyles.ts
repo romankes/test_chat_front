@@ -10,19 +10,14 @@ export const useStyles = () => {
       StyleSheet.create({
         input: {
           borderBottomWidth: 1,
+          height: 38,
+          borderBottomColor: pallete.border.default,
         },
         textInput: {
+          height: 38,
+
           fontFamily: fonts.regular,
           color: pallete.text.default,
-        },
-        success: {
-          borderBottomColor: pallete.border.success,
-        },
-        danger: {
-          borderBottomColor: pallete.border.danger,
-        },
-        gray: {
-          borderBottomColor: pallete.border.default,
         },
       }),
     [pallete],

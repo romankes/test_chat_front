@@ -29,16 +29,7 @@ export const FilledField: FC<TProps> = ({error, margin, ...props}) => {
   const {styles, placeholderColor} = useStyles();
 
   return (
-    <View
-      style={[
-        styles.input,
-        error?.message
-          ? styles.danger
-          : props.value
-          ? styles.success
-          : styles.gray,
-        margins,
-      ]}>
+    <View style={[styles.input, margins]}>
       <TextInput
         placeholderTextColor={placeholderColor}
         numberOfLines={1}

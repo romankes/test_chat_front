@@ -20,6 +20,7 @@ export function* signIn(action: SignInAsync): SagaIterator {
 
     if (response.data.token) {
       const isSaved = yield call(apiAuth.saveToken, response.data.token);
+
       if (isSaved) {
         yield all([
           put(authActions.saveToken(response.data.token)),

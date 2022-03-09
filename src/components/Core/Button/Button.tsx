@@ -53,7 +53,7 @@ export const Button: FC<TProps> = ({
       {...props}
       style={[
         styles.wrapper,
-        {borderRadius: variant === 'square' ? 0 : 8},
+        {borderRadius: variant === 'square' ? 8 : 16},
         {...margins},
         props.style,
       ]}>

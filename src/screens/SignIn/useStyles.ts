@@ -14,7 +14,7 @@ export const useStyles = () => {
         container: {
           height: '100%',
           paddingHorizontal: 16,
-          justifyContent: 'space-between',
+          justifyContent: 'center',
         },
       }),
     [],

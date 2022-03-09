@@ -1,7 +1,7 @@
 export namespace Auth {
   export type ReqSignIn = {
     email: string;
-    passwod: string;
+    password: string;
   };
 
   export type ResSignIn = {

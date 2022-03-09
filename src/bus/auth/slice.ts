@@ -11,7 +11,9 @@ const slice = createSlice({
   name: 'Auth',
   initialState,
   reducers: {
-    saveToken: (state: AuthState, action: PayloadAction<string>) => {},
+    saveToken: (state: AuthState, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
     clearToken: (state: AuthState) => {
       state.token = null;
     },

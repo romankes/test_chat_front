@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector, useDispatch} from 'react-redux';
@@ -11,6 +11,10 @@ import {Loader} from '../components/Core/Loader';
 import {authSelectors} from '@/bus/auth';
 import {appActions, appSelectors} from '@/bus/app';
 import {View} from 'react-native';
+import {Empty} from '@/screens';
+
+import {io} from 'socket.io-client';
+import {_apiBase} from '@/configs';
 
 export type AppStackParamList = {
   [Routes.AUTH]: undefined;
@@ -33,6 +37,35 @@ export const AppNavigator: FC = () => {
     }
   }, [initalized]);
 
+  const onSetUpSocket = useCallback(() => {
+    if (token) {
+      const socket = io(_apiBase, {
+        auth: {
+          token: `Bearer ${token}`,
+        },
+      });
+
+      socket.on('disconnect', (e) => {
+        console.log(e);
+      });
+      socket.emit('message_create', {
+        message: {
+          text: 'awd',
+        },
+        id: new Date().getMilliseconds(),
+      });
+
+      socket.on('message_get', (data) => {
+        console.log('message', data);
+      });
+      // socket.disconnect();
+    }
+  }, [token]);
+
+  useEffect(() => {
+    onSetUpSocket();
+  }, [onSetUpSocket]);
+
   if (!initalized) return null;
   return (
     <NavigationContainer>
@@ -43,7 +76,7 @@ export const AppNavigator: FC = () => {
         {!token && (
           <AppStack.Screen name={Routes.AUTH} component={AuthNavigator} />
         )}
-        {/* <AppStack.Screen name={Routes.TABS} component={TabNavigator} /> */}
+        <AppStack.Screen name={Routes.TABS} component={Empty} />
       </AppStack.Navigator>
     </NavigationContainer>
   );
