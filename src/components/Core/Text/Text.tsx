@@ -1,10 +1,9 @@
-import React, {FC, useMemo} from 'react';
+import React, {FC, ReactNode, useMemo} from 'react';
 import {Text as TextNative, TextProps} from 'react-native';
 import {Fonts, TextColors} from '@/themes';
 import {useStyles} from './useStyles';
 
 type TProps = TextProps & {
-  children: any;
   color?: keyof TextColors;
   size?: number;
   textAlign?: 'center' | 'left' | 'right';

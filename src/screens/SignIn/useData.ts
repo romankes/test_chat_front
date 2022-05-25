@@ -16,14 +16,16 @@ export const useData = () => {
     formState: {errors},
     handleSubmit,
   } = useForm<Auth.ReqSignIn>({
+    mode: 'onChange',
     defaultValues: {
-      email: 'admin@admin.com',
-      password: 'polopolo',
+      email: '',
+      password: '',
     },
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = (data: Auth.ReqSignIn) => {
-    dispatch(authActions.signUpAsync(data));
+    dispatch(authActions.signInAsync(data));
   };
 
   return {isLoading, handleSubmit: handleSubmit(onSubmit), errors, control};

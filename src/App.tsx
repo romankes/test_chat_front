@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+
 import React from 'react';
 import {LogBox, View} from 'react-native';
 import {Provider} from 'react-redux';

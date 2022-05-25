@@ -2,25 +2,43 @@ import type {Pallete} from './types';
 
 const pallete: Pallete = {
   background: {
-    default: '#fff',
+    default: '#FCFAFF',
+    gray: '#EEDFFE',
+    danger: '#EF4444',
   },
   text: {
-    default: '#272643',
-    link: '#2c698d',
-    gray: '#afaec6',
+    default: '#101828',
+    link: '#00B3A6',
+    gray: '#475467',
+    danger: '#EF4444',
   },
   icon: {
-    default: '#272643',
+    default: '#101828',
     gray: '#afaec6',
   },
   button: {
     background: {
-      default: '#272643',
-      action: '#2c698d',
+      default: '#5600E8',
     },
     text: {
-      action: '#fff',
       default: '#fff',
+    },
+    border: {
+      default: '#5600E8',
+    },
+  },
+  input: {
+    background: {
+      default: '#EEDFFE33',
+      danger: '#EF444433',
+    },
+    border: {
+      default: '#EF444400',
+      danger: '#EF4444',
+    },
+    text: {
+      default: '#101828',
+      danger: '#101828',
     },
   },
   border: {

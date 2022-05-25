@@ -14,7 +14,7 @@ import {View} from 'react-native';
 import {Empty} from '@/screens';
 
 import {io} from 'socket.io-client';
-import {_apiBase} from '@/configs';
+import ENV from '@/configs';
 
 export type AppStackParamList = {
   [Routes.AUTH]: undefined;
@@ -39,23 +39,17 @@ export const AppNavigator: FC = () => {
 
   const onSetUpSocket = useCallback(() => {
     if (token) {
-      const socket = io(_apiBase, {
+      const socket = io(ENV.BASE_URL, {
         auth: {
           token: `Bearer ${token}`,
         },
       });
 
-      socket.on('disconnect', (e) => {
+      socket.on('disconnect', (e: any) => {
         console.log(e);
       });
-      socket.emit('message_create', {
-        message: {
-          text: 'awd',
-        },
-        id: new Date().getMilliseconds(),
-      });
 
-      socket.on('message_get', (data) => {
+      socket.on('create_message', (data: any) => {
         console.log('message', data);
       });
       // socket.disconnect();

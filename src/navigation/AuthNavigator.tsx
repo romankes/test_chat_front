@@ -16,7 +16,7 @@ const AuthStack = createStackNavigator<AuthStackParamList>();
 
 export const AuthNavigator = () => {
   return (
-    <AuthStack.Navigator>
+    <AuthStack.Navigator screenOptions={{headerShown: false}}>
       <AuthStack.Screen
         name={Routes.SIGN_IN}
         component={SignIn}
@@ -24,13 +24,13 @@ export const AuthNavigator = () => {
           title: 'Sign In',
         }}
       />
-      {/* <AuthStack.Screen
+      <AuthStack.Screen
         name={Routes.SIGN_UP}
         component={SignUp}
         options={{
           title: 'Sign Up',
         }}
-      /> */}
+      />
     </AuthStack.Navigator>
   );
 };

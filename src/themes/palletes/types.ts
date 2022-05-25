@@ -1,7 +1,9 @@
 import {ColorValue} from 'react-native';
 
-type Background = {
+export type Background = {
   default: ColorValue;
+  gray: ColorValue;
+  danger: ColorValue;
 };
 
 export type Icon = {
@@ -12,22 +14,40 @@ export type Text = {
   default: ColorValue;
   gray: ColorValue;
   link: ColorValue;
+  danger: ColorValue;
 };
 type Button = {
   background: {
     default: ColorValue;
-    action: ColorValue;
   };
   text: {
-    action: ColorValue;
     default: ColorValue;
+  };
+  border: {
+    default: ColorValue;
+  };
+};
+
+type Input = {
+  background: {
+    default: ColorValue;
+    danger: ColorValue;
+  };
+  text: {
+    default: ColorValue;
+    danger: ColorValue;
+  };
+  border: {
+    default: ColorValue;
+    danger: ColorValue;
   };
 };
 type Border = {
   default: ColorValue;
 };
 
-export type ButtonKeysIcon = keyof Button['background'];
+export type ButtonKeys = keyof Button['background'];
+export type InputKeys = keyof Input['background'];
 
 export type Pallete = {
   background: Background;
@@ -35,4 +55,5 @@ export type Pallete = {
   icon: Icon;
   button: Button;
   border: Border;
+  input: Input;
 };

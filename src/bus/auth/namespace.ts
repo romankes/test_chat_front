@@ -8,10 +8,13 @@ export namespace Auth {
     token: string;
   };
 
-  export type ReqSignUp = {
+  export type SignUpForm = {
     email: string;
     password: string;
+    confirmPassword: string;
   };
+
+  export type ReqSignUp = Pick<SignUpForm, 'email' | 'password'>;
 
   export type ResSignUp = {
     token: string;

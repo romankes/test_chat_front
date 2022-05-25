@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosInstance} from 'axios';
-import {_apiBase} from '@/configs';
+import ENV from '@/configs';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const axiosInstance: AxiosInstance = axios.create({
@@ -7,7 +7,7 @@ const axiosInstance: AxiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: 120000,
-  baseURL: _apiBase,
+  baseURL: ENV.BASE_URL,
 });
 
 axiosInstance.interceptors.request.use(

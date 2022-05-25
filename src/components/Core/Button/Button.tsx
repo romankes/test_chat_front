@@ -5,15 +5,16 @@ import {
   Text,
   View,
 } from 'react-native';
-import {ButtonKeysIcon} from '@/themes/palletes/types';
+import {ButtonKeys} from '@/themes/palletes/types';
 
 import {useStyles} from './useStyles';
 import {Fonts} from '@/themes';
 
 type TProps = TouchableOpacityProps & {
   children: any;
-  color?: ButtonKeysIcon;
+  color?: ButtonKeys;
   variant?: 'round' | 'square';
+  size?: 'normal';
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   weight?: keyof typeof Fonts;
@@ -30,6 +31,7 @@ export const Button: FC<TProps> = ({
   color = 'default',
   variant = 'square',
   weight = 'regular',
+  size = 'normal',
   margin,
   leftIcon = null,
   rightIcon = null,
@@ -47,16 +49,29 @@ export const Button: FC<TProps> = ({
     [margin],
   );
 
+  const height = useMemo(() => {
+    switch (size) {
+      case 'normal':
+        return 52;
+      default:
+        return 52;
+    }
+  }, [size]);
+
+  const borderRadius = useMemo(() => {
+    switch (variant) {
+      case 'round':
+        return 16;
+      case 'square':
+        return 16;
+    }
+  }, [variant]);
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       {...props}
-      style={[
-        styles.wrapper,
-        {borderRadius: variant === 'square' ? 8 : 16},
-        {...margins},
-        props.style,
-      ]}>
+      style={[styles.wrapper, {...margins, borderRadius, height}, props.style]}>
       {leftIcon && <View style={styles.leftIconWrapper}>{leftIcon}</View>}
       <Text style={styles.text}>{children}</Text>
       {rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>}
