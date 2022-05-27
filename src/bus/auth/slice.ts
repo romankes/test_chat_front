@@ -14,9 +14,6 @@ const slice = createSlice({
     saveToken: (state: AuthState, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
-    clearToken: (state: AuthState) => {
-      state.token = null;
-    },
   },
 });
 
@@ -38,7 +35,8 @@ export const authActions = {
   logoutAsync: (): AuthActionTypes => ({
     type: types.LOGOUT,
   }),
-  clearAsync: (): AuthActionTypes => ({
-    type: types.CLEAR,
+  updateTokenAsync: (payload: string): AuthActionTypes => ({
+    type: types.UPDATE_TOKEN,
+    payload,
   }),
 };

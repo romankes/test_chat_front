@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {UserState, UserActionTypes, types} from './types';
+import {UserState, UserActionTypes, types, UpdateDetailAsync} from './types';
 import {User} from './namespace';
 
 const initialState: UserState = {
@@ -24,6 +24,10 @@ export default slice.reducer;
 
 export const userActions = {
   ...slice.actions,
+  updateDetailAsync: (payload: User.ReqUpdateDetail): UpdateDetailAsync => ({
+    type: types.UPDATE_DETAIL,
+    payload,
+  }),
   fetchDetailAsync: (): UserActionTypes => ({
     type: types.FETCH_DETAIL,
   }),

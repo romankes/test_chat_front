@@ -16,7 +16,7 @@ export const apiAuth = new (class Api {
       }
     });
   }
-  saveToken(token: string): Promise<boolean> {
+  updateToken(token: string): Promise<boolean> {
     return new Promise(async (res, rej) => {
       try {
         await AsyncStorage.setItem('TOKEN', token);

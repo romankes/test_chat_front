@@ -3,11 +3,12 @@ import {AxiosResponse} from 'axios';
 import {all, put, call, take} from 'redux-saga/effects';
 import {uiActions} from '@/bus/ui';
 import {SagaIterator} from 'redux-saga';
-import {SignInAsync} from '../../types';
+import {SignInAsync, types} from '../../types';
 import {apiAuth} from '../../api';
 import {Auth} from '../../namespace';
 import {authActions} from '../../slice';
 import {types as userTypes} from '@/bus/user/types';
+import {navigate, Routes} from '@/navigation';
 
 export function* signIn(action: SignInAsync): SagaIterator {
   try {
@@ -19,15 +20,13 @@ export function* signIn(action: SignInAsync): SagaIterator {
     );
 
     if (response.data.token) {
-      const isSaved = yield call(apiAuth.saveToken, response.data.token);
+      yield put(authActions.updateTokenAsync(response.data.token));
+      yield take(types.END_UPDATE_TOKEN);
 
-      if (isSaved) {
-        yield all([
-          put(authActions.saveToken(response.data.token)),
-          put(userActions.fetchDetailAsync()),
-        ]);
-        yield take(userTypes.END_FETCH_DETAIL);
-      }
+      yield put(userActions.fetchDetailAsync());
+      yield take(userTypes.END_FETCH_DETAIL);
+
+      navigate(Routes.TABS);
     }
   } catch (e) {
     console.log(`error sign in worker ${e}`);

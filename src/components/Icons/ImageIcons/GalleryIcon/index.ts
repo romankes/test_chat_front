@@ -1,0 +1,1 @@
+export {GalleryIcon} from './GalleryIcon';

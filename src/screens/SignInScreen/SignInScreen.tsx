@@ -7,11 +7,11 @@ import {Button, Text, FilledField, Loader} from '@/components';
 import {Controller} from 'react-hook-form';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AuthStackParamList} from '@/navigation/AuthNavigator';
-import {Routes} from '@/navigation/Routes';
+import {Routes} from '@/navigation';
 
 type TProps = StackScreenProps<AuthStackParamList, Routes.SIGN_IN>;
 
-export const SignIn: FC<TProps> = ({navigation}) => {
+export const SignInScreen: FC<TProps> = ({navigation}) => {
   const {styles} = useStyles();
   const {control, errors, handleSubmit, isLoading} = useData();
   return (

@@ -1,7 +1,7 @@
 import {SagaIterator} from 'redux-saga';
 import {all, call, takeEvery} from 'redux-saga/effects';
 import {types} from '../types';
-import {clear, fetchToken, logout, signIn, signUp} from './workers';
+import {updateToken, fetchToken, logout, signIn, signUp} from './workers';
 
 function* watchSignIn(): SagaIterator {
   yield takeEvery(types.SIGN_IN, signIn);
@@ -13,8 +13,8 @@ function* watchSignUp(): SagaIterator {
 function* watchFetchToken(): SagaIterator {
   yield takeEvery(types.FETCH_TOKEN, fetchToken);
 }
-function* watchClear(): SagaIterator {
-  yield takeEvery(types.CLEAR, clear);
+function* watchUpdateToken(): SagaIterator {
+  yield takeEvery(types.UPDATE_TOKEN, updateToken);
 }
 function* watchLogout(): SagaIterator {
   yield takeEvery(types.LOGOUT, logout);
@@ -22,7 +22,7 @@ function* watchLogout(): SagaIterator {
 
 export function* watchAuth() {
   yield all([
-    call(watchClear),
+    call(watchUpdateToken),
     call(watchSignIn),
     call(watchSignUp),
     call(watchFetchToken),

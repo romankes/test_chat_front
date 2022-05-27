@@ -26,7 +26,12 @@ export const useData = () => {
   });
 
   const onSubmit = (data: Auth.ReqSignIn) => {
-    dispatch(authActions.signUpAsync(data));
+    dispatch(
+      authActions.signUpAsync({
+        email: data.email,
+        password: data.password,
+      }),
+    );
   };
 
   return {isLoading, handleSubmit: handleSubmit(onSubmit), errors, control};

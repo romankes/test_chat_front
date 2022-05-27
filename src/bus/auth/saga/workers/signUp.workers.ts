@@ -1,7 +1,7 @@
 import {all, put, call, take} from 'redux-saga/effects';
 import {uiActions} from '@/bus/ui';
 import {SagaIterator} from 'redux-saga';
-import {SignUpAsync} from '../../types';
+import {SignUpAsync, types} from '../../types';
 import {AxiosResponse} from 'axios';
 import {Auth} from '../../namespace';
 import {apiAuth} from '../../api';
@@ -19,14 +19,11 @@ export function* signUp(action: SignUpAsync): SagaIterator {
     );
 
     if (response.data.token) {
-      const isSaved = yield call(apiAuth.saveToken, response.data.token);
-      if (isSaved) {
-        yield all([
-          put(authActions.saveToken(response.data.token)),
-          put(userActions.fetchDetailAsync()),
-        ]);
-        yield take(userTypes.END_FETCH_DETAIL);
-      }
+      yield put(authActions.updateTokenAsync(response.data.token));
+      yield take(types.END_UPDATE_TOKEN);
+
+      yield put(userActions.fetchDetailAsync());
+      yield take(userTypes.END_FETCH_DETAIL);
     }
   } catch (e) {
     console.log(`error sign up worker ${e}`);

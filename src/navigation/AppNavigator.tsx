@@ -11,14 +11,17 @@ import {Loader} from '../components/Core/Loader';
 import {authSelectors} from '@/bus/auth';
 import {appActions, appSelectors} from '@/bus/app';
 import {View} from 'react-native';
-import {Empty} from '@/screens';
+import {Empty, FinishSignUpScreen} from '@/screens';
 
 import {io} from 'socket.io-client';
 import ENV from '@/configs';
+import {navigationRef} from './RootNavigation';
 
 export type AppStackParamList = {
   [Routes.AUTH]: undefined;
   [Routes.TABS]: undefined;
+  [Routes.USER_DETAIL]: undefined;
+  [Routes.FINISH_SIGN_UP]: undefined;
 };
 
 const AppStack = createStackNavigator<AppStackParamList>();
@@ -62,14 +65,25 @@ export const AppNavigator: FC = () => {
 
   if (!initalized) return null;
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      theme={{
+        ...DefaultTheme,
+        colors: {
+          ...DefaultTheme.colors,
+          background: 'transparent',
+        },
+      }}>
       <AppStack.Navigator
+        initialRouteName={token ? Routes.TABS : Routes.AUTH}
         screenOptions={{
           headerShown: false,
         }}>
-        {!token && (
-          <AppStack.Screen name={Routes.AUTH} component={AuthNavigator} />
-        )}
+        <AppStack.Screen name={Routes.AUTH} component={AuthNavigator} />
+        <AppStack.Screen
+          name={Routes.FINISH_SIGN_UP}
+          component={FinishSignUpScreen}
+        />
         <AppStack.Screen name={Routes.TABS} component={Empty} />
       </AppStack.Navigator>
     </NavigationContainer>

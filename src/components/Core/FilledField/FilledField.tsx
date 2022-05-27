@@ -158,8 +158,6 @@ export const FilledField: FC<TProps> = ({
               }
             }}
             onBlur={(e) => {
-              console.log(props.value);
-
               if (!props.value && isTopLabel) {
                 setIsTopLabel(false);
               }

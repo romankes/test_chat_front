@@ -5,16 +5,19 @@ const pallete: Pallete = {
     default: '#FCFAFF',
     gray: '#EEDFFE',
     danger: '#EF4444',
+    dark: '#101828',
   },
   text: {
     default: '#101828',
     link: '#00B3A6',
     gray: '#475467',
     danger: '#EF4444',
+    light: '#FCFAFF',
   },
   icon: {
     default: '#101828',
     gray: '#afaec6',
+    light: '#FCFAFF',
   },
   button: {
     background: {

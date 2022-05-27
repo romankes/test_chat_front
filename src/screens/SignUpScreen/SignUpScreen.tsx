@@ -1,11 +1,16 @@
 import {Button, FilledField, Header, Text} from '@/components';
-import React from 'react';
+import {Routes} from '@/navigation';
+import {AuthStackParamList} from '@/navigation/AuthNavigator';
+import {StackScreenProps} from '@react-navigation/stack';
+import React, {FC} from 'react';
 import {Controller} from 'react-hook-form';
 import {SafeAreaView, View} from 'react-native';
 import {useData} from './useData';
 import {useStyles} from './useStyles';
 
-export const SignUp = () => {
+type TProps = StackScreenProps<AuthStackParamList, Routes.SIGN_UP>;
+
+export const SignUpScreen: FC<TProps> = ({navigation}) => {
   const {control, errors, handleSubmit, isLoading} = useData();
 
   const {styles} = useStyles();
@@ -68,7 +73,12 @@ export const SignUp = () => {
           />
         </View>
 
-        <Button onPress={handleSubmit} margin={{top: 12}}>
+        <Button
+          onPress={() => {
+            navigation.navigate(Routes.FINISH_SIGN_UP);
+            // handleSubmit()
+          }}
+          margin={{top: 12}}>
           Sign Up
         </Button>
       </View>

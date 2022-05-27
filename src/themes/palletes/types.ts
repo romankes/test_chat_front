@@ -4,17 +4,20 @@ export type Background = {
   default: ColorValue;
   gray: ColorValue;
   danger: ColorValue;
+  dark: ColorValue;
 };
 
 export type Icon = {
   default: ColorValue;
   gray: ColorValue;
+  light: ColorValue;
 };
 export type Text = {
   default: ColorValue;
   gray: ColorValue;
   link: ColorValue;
   danger: ColorValue;
+  light: ColorValue;
 };
 type Button = {
   background: {
