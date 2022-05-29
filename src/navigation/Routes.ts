@@ -5,8 +5,9 @@ export enum Routes {
   TABS = 'TABS',
 
   //TABS
-  PROFILE = 'PROFILE',
-  CHAT = 'CHAT',
+  USER = 'USER',
+  ROOM = 'ROOM',
+  ROOM_CREATE = 'ROOM_CREATE',
 
   //AUTH_NAVIGATOR
   SIGN_IN = 'SIGN_IN',
@@ -15,4 +16,8 @@ export enum Routes {
 
   //PROFILE
   USER_DETAIL = 'USER_DETAIL',
+
+  //ROOM
+  ROOMS_LIST = 'ROOMS_LIST',
+  ROOM_DETAIL = 'ROOMS_DETAIL',
 }

@@ -29,11 +29,22 @@ export const useStyles = ({color, family}: TArgs) => {
           left: 8,
         },
 
-        inputWrapper: {
+        fieldWrapper: {
           height: 42,
 
           borderRadius: 8,
           borderWidth: 1,
+
+          flexDirection: 'row',
+          flexWrap: 'nowrap',
+          alignItems: 'center',
+
+          paddingHorizontal: 8,
+        },
+
+        inputWrapper: {
+          flexGrow: 1,
+          flexShrink: 1,
         },
         textInput: {
           height: 42,
@@ -44,23 +55,20 @@ export const useStyles = ({color, family}: TArgs) => {
           fontFamily: fonts[family],
           color: pallete.input.text[color],
         },
+
+        leftIconWrapper: {
+          flexShrink: 0,
+        },
+        rightIconWrapper: {
+          flexShrink: 0,
+          paddingRight: 5,
+        },
       }),
     [pallete, color, family],
   );
 
-  const backgroundColors = useMemo(
-    () => [pallete.input.background[color], pallete.input.background.danger],
-    [pallete, color],
-  );
-  const borderColors = useMemo(
-    () => [pallete.input.border[color], pallete.input.border.danger],
-    [pallete, color],
-  );
-
   return {
     styles,
-    backgroundColors,
-    borderColors,
     placeholderColor: pallete.text.gray as string,
   };
 };

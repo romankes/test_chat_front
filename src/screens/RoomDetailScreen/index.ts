@@ -1,0 +1,1 @@
+export {RoomDetailScreen} from './RoomDetailScreen';

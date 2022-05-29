@@ -5,12 +5,14 @@ export type Background = {
   gray: ColorValue;
   danger: ColorValue;
   dark: ColorValue;
+  action: ColorValue;
 };
 
 export type Icon = {
   default: ColorValue;
   gray: ColorValue;
   light: ColorValue;
+  action: ColorValue;
 };
 export type Text = {
   default: ColorValue;
@@ -18,6 +20,7 @@ export type Text = {
   link: ColorValue;
   danger: ColorValue;
   light: ColorValue;
+  action: ColorValue;
 };
 type Button = {
   background: {
@@ -35,14 +38,17 @@ type Input = {
   background: {
     default: ColorValue;
     danger: ColorValue;
+    action: ColorValue;
   };
   text: {
     default: ColorValue;
     danger: ColorValue;
+    action: ColorValue;
   };
   border: {
     default: ColorValue;
     danger: ColorValue;
+    action: ColorValue;
   };
 };
 type Border = {

@@ -1,0 +1,1 @@
+export {RoomCreateIcon} from './RoomCreateIcon';

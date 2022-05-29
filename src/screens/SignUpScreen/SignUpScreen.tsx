@@ -73,12 +73,7 @@ export const SignUpScreen: FC<TProps> = ({navigation}) => {
           />
         </View>
 
-        <Button
-          onPress={() => {
-            navigation.navigate(Routes.FINISH_SIGN_UP);
-            // handleSubmit()
-          }}
-          margin={{top: 12}}>
+        <Button onPress={handleSubmit} margin={{top: 12}}>
           Sign Up
         </Button>
       </View>

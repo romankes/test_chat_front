@@ -16,6 +16,8 @@ import {Empty, FinishSignUpScreen} from '@/screens';
 import {io} from 'socket.io-client';
 import ENV from '@/configs';
 import {navigationRef} from './RootNavigation';
+import {TabNavigator} from './TabNavigator';
+import {useSocket} from '@/hooks';
 
 export type AppStackParamList = {
   [Routes.AUTH]: undefined;
@@ -40,28 +42,7 @@ export const AppNavigator: FC = () => {
     }
   }, [initalized]);
 
-  const onSetUpSocket = useCallback(() => {
-    if (token) {
-      const socket = io(ENV.BASE_URL, {
-        auth: {
-          token: `Bearer ${token}`,
-        },
-      });
-
-      socket.on('disconnect', (e: any) => {
-        console.log(e);
-      });
-
-      socket.on('create_message', (data: any) => {
-        console.log('message', data);
-      });
-      // socket.disconnect();
-    }
-  }, [token]);
-
-  useEffect(() => {
-    onSetUpSocket();
-  }, [onSetUpSocket]);
+  const socket = useSocket();
 
   if (!initalized) return null;
   return (
@@ -80,11 +61,11 @@ export const AppNavigator: FC = () => {
           headerShown: false,
         }}>
         <AppStack.Screen name={Routes.AUTH} component={AuthNavigator} />
+        <AppStack.Screen name={Routes.TABS} component={TabNavigator} />
         <AppStack.Screen
           name={Routes.FINISH_SIGN_UP}
           component={FinishSignUpScreen}
         />
-        <AppStack.Screen name={Routes.TABS} component={Empty} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

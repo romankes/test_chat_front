@@ -5,6 +5,7 @@ export namespace User {
     email: string;
     avatar: string;
     online: boolean;
+    username: string;
     _id: string;
   };
 

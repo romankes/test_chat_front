@@ -9,7 +9,9 @@ export const useStyles = () => {
     () =>
       StyleSheet.create({
         wrapper: {
-          backgroundColor: pallete.background.gray,
+          backgroundColor: pallete.background.action,
+
+          justifyContent: 'center',
         },
 
         image: {

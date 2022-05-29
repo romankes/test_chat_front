@@ -13,8 +13,6 @@ export function* fetchDetail(): SagaIterator {
       apiUser.fetchDetail,
     );
 
-    console.log(response.data);
-
     if (response.data.user) {
       yield put(userActions.saveDetail(response.data.user));
     }

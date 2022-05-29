@@ -1,6 +1,6 @@
 import {Fonts} from '@/themes';
 import {InputKeys} from '@/themes/palletes/types';
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import React, {FC, ReactNode, useEffect, useMemo, useState} from 'react';
 import {FieldError} from 'react-hook-form';
 
 import {
@@ -11,6 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {Text} from '../Text';
+import {useAnimation} from './useAnimation';
 
 import {useStyles} from './useStyles';
 
@@ -25,6 +26,11 @@ type TProps = TextInputProps & {
     top?: number;
     left?: number;
   };
+
+  rightIcon?: ReactNode;
+  leftIcon?: ReactNode;
+
+  errorEmpty?: boolean;
 };
 
 export const FilledField: FC<TProps> = ({
@@ -33,14 +39,24 @@ export const FilledField: FC<TProps> = ({
   color = 'default',
   family = 'regular',
   label,
+  rightIcon,
+  leftIcon,
+  errorEmpty = false,
   ...props
 }) => {
-  const {styles, placeholderColor, backgroundColors, borderColors} = useStyles({
+  const {styles, placeholderColor} = useStyles({
     color,
     family,
   });
 
   const [isTopLabel, setIsTopLabel] = useState(!!props.value);
+
+  const {backgroundColor, borderColor, position} = useAnimation({
+    color,
+    errorTrigger: !!error?.message,
+    labelTrigger: isTopLabel,
+    value: props.value || '',
+  });
 
   const margins = useMemo(
     () => ({
@@ -51,86 +67,6 @@ export const FilledField: FC<TProps> = ({
     }),
     [margin],
   );
-
-  const errorAnimation = useMemo(() => new Animated.Value(0), []);
-  const labelAnimation = useMemo(
-    () => new Animated.Value(props.value ? 1 : 0),
-    [],
-  );
-
-  // const translate = useMemo(
-  //   () =>
-  //     labelAnimation.interpolate({
-  //       inputRange: [0, 1],
-  //       outputRange: [0, label ? -1 * label.length * 12 : 0],
-  //     }),
-  //   [backgroundColors],
-  // );
-
-  //TODO create use data
-
-  const backgroundColor = useMemo(
-    () =>
-      errorAnimation.interpolate({
-        inputRange: [0, 1],
-        outputRange: backgroundColors as string[],
-      }),
-    [backgroundColors],
-  );
-
-  const borderColor = useMemo(
-    () =>
-      errorAnimation.interpolate({
-        inputRange: [0, 1],
-        outputRange: borderColors as string[],
-      }),
-    [backgroundColors],
-  );
-
-  const position = useMemo(() => {
-    return {
-      top: labelAnimation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, -38],
-      }),
-      left: labelAnimation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [8, 0],
-      }),
-    };
-  }, [labelAnimation]);
-
-  useEffect(() => {
-    if (isTopLabel) {
-      Animated.timing(labelAnimation, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(labelAnimation, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [isTopLabel]);
-
-  useEffect(() => {
-    if (error?.message) {
-      Animated.timing(errorAnimation, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(errorAnimation, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [error]);
 
   return (
     <View style={[styles.wrapper, margins, !!label && {height: 86}]}>
@@ -144,8 +80,9 @@ export const FilledField: FC<TProps> = ({
         </Animated.View>
       )}
       <Animated.View
-        style={[styles.inputWrapper, {backgroundColor, borderColor}]}>
-        <View>
+        style={[styles.fieldWrapper, {backgroundColor, borderColor}]}>
+        {leftIcon && <View style={styles.leftIconWrapper}>{leftIcon}</View>}
+        <View style={styles.inputWrapper}>
           <TextInput
             {...props}
             onFocus={(e) => {
@@ -173,10 +110,13 @@ export const FilledField: FC<TProps> = ({
             style={[styles.textInput, props.style]}
           />
         </View>
+        {rightIcon && <View style={styles.rightIconWrapper}>{rightIcon}</View>}
       </Animated.View>
-      <Text margin={{top: 8}} color="danger" family="light">
-        {error?.message || ''}
-      </Text>
+      {!errorEmpty && (
+        <Text margin={{top: 8}} color="danger" family="light">
+          {error?.message || ''}
+        </Text>
+      )}
     </View>
   );
 };

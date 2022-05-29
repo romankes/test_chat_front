@@ -1,0 +1,1 @@
+export {UserDetailScreen} from './UserDetailScreen';

@@ -1,18 +1,20 @@
 import React, {FC, useMemo} from 'react';
 import {Image, View} from 'react-native';
+import {Text} from '../Core';
 
 import {useStyles} from './useStyles';
 
 type TProps = {
   url: string | null;
   variant?: 'sqaure' | 'round';
-  size?: 'small' | 'normal';
+  size?: 'extraSmall' | 'small' | 'normal';
   margin?: {
     right?: number;
     bottom?: number;
     top?: number;
     left?: number;
   };
+  letter?: string;
 };
 
 export const Avatar: FC<TProps> = ({
@@ -20,6 +22,7 @@ export const Avatar: FC<TProps> = ({
   size = 'normal',
   variant = 'sqaure',
   margin,
+  letter,
 }) => {
   const {styles} = useStyles();
 
@@ -35,10 +38,12 @@ export const Avatar: FC<TProps> = ({
 
   const sizeData = useMemo(() => {
     switch (size) {
-      case 'normal':
-        return {height: 164, width: 164};
+      case 'extraSmall':
+        return {height: 24, width: 24};
       case 'small':
         return {height: 64, width: 64};
+      case 'normal':
+        return {height: 164, width: 164};
       default:
         return {height: 64, width: 64};
     }
@@ -57,7 +62,15 @@ export const Avatar: FC<TProps> = ({
 
   return (
     <View style={[styles.wrapper, sizeData, margins, {borderRadius}]}>
-      {!!url && <Image style={styles.image} source={{uri: url}} />}
+      {url ? (
+        <Image style={styles.image} source={{uri: url}} />
+      ) : (
+        letter && (
+          <Text textAlign="center" size={18} color="light">
+            {letter.toUpperCase()}
+          </Text>
+        )
+      )}
     </View>
   );
 };
