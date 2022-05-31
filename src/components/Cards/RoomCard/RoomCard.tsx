@@ -60,7 +60,7 @@ export const RoomCard: FC<TProps> = ({onPress, room}) => {
             {renderName}
           </Text>
           <Text family="light" numberOfLines={1} ellipsizeMode="tail">
-            awdawdawdawd awed
+            {room.message?.text || 'Chat was created'}
           </Text>
         </View>
         <View style={styles.info}>

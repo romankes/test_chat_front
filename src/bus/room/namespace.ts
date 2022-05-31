@@ -9,6 +9,8 @@ export namespace Room {
     title: string;
     updatedAt: string;
     users: User.Detail[];
+
+    message: Message.Item | null;
   };
 
   export type Detail = Item;
