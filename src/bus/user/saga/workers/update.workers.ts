@@ -13,7 +13,7 @@ export function* updateDetail(action: UpdateDetailAsync): SagaIterator {
       action.payload,
     );
 
-    navigate(Routes.TABS);
+    navigate(Routes.TABS_NAVIGATOR);
   } catch (e) {
     console.log(`update user detail worker ${e}`);
   } finally {

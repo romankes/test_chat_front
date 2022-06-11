@@ -9,11 +9,12 @@ import {RoomNavigator} from './RoomNavigator';
 import {UserNavigator} from './UserNavigator';
 import {useTabBarState, useTheme} from '@/hooks';
 import {ChatIcon, ProfileIcon, RoomCreateIcon} from '@/components';
+import {RoomCreateNavigator} from './RoomCreateNavigator';
 
 export type TabStackParamList = {
-  [Routes.USER]: undefined;
-  [Routes.ROOM_CREATE]: undefined;
-  [Routes.ROOM]: undefined;
+  [Routes.USER_NAVIGATOR]: undefined;
+  [Routes.ROOM_CREATE_NAVIGATOR]: undefined;
+  [Routes.ROOM_NAVIGATOR]: undefined;
 };
 
 const TabStack = createBottomTabNavigator<TabStackParamList>();
@@ -44,7 +45,7 @@ export const TabNavigator = () => {
           tabBarActiveTintColor: pallete.text.action as string,
           tabBarInactiveTintColor: pallete.text.default as string,
         })}
-        name={Routes.ROOM}
+        name={Routes.ROOM_NAVIGATOR}
         component={RoomNavigator}
       />
       <TabStack.Screen
@@ -53,23 +54,28 @@ export const TabNavigator = () => {
             <RoomCreateIcon color={focused ? 'action' : 'default'} size={24} />
           ),
           tabBarLabel: 'Create Chat',
-
+          tabBarStyle: {
+            display: 'none',
+          },
           tabBarActiveTintColor: pallete.text.action as string,
           tabBarInactiveTintColor: pallete.text.default as string,
         })}
-        name={Routes.ROOM_CREATE}
-        component={Empty}
+        name={Routes.ROOM_CREATE_NAVIGATOR}
+        component={RoomCreateNavigator}
       />
       <TabStack.Screen
         options={() => ({
           tabBarIcon: ({focused}) => (
             <ProfileIcon color={focused ? 'action' : 'default'} size={24} />
           ),
+          tabBarStyle: {
+            display: 'none',
+          },
           tabBarLabel: 'Profile',
           tabBarActiveTintColor: pallete.text.action as string,
           tabBarInactiveTintColor: pallete.text.default as string,
         })}
-        name={Routes.USER}
+        name={Routes.USER_NAVIGATOR}
         component={UserNavigator}
       />
     </TabStack.Navigator>

@@ -20,8 +20,8 @@ import {TabNavigator} from './TabNavigator';
 import {useSocket} from '@/hooks';
 
 export type AppStackParamList = {
-  [Routes.AUTH]: undefined;
-  [Routes.TABS]: undefined;
+  [Routes.AUTH_NAVIGATOR]: undefined;
+  [Routes.TABS_NAVIGATOR]: undefined;
   [Routes.USER_DETAIL]: undefined;
   [Routes.FINISH_SIGN_UP]: undefined;
 };
@@ -56,12 +56,18 @@ export const AppNavigator: FC = () => {
         },
       }}>
       <AppStack.Navigator
-        initialRouteName={token ? Routes.TABS : Routes.AUTH}
+        initialRouteName={token ? Routes.TABS_NAVIGATOR : Routes.AUTH_NAVIGATOR}
         screenOptions={{
           headerShown: false,
         }}>
-        <AppStack.Screen name={Routes.AUTH} component={AuthNavigator} />
-        <AppStack.Screen name={Routes.TABS} component={TabNavigator} />
+        <AppStack.Screen
+          name={Routes.AUTH_NAVIGATOR}
+          component={AuthNavigator}
+        />
+        <AppStack.Screen
+          name={Routes.TABS_NAVIGATOR}
+          component={TabNavigator}
+        />
         <AppStack.Screen
           name={Routes.FINISH_SIGN_UP}
           component={FinishSignUpScreen}

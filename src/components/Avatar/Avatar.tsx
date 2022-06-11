@@ -41,11 +41,11 @@ export const Avatar: FC<TProps> = ({
       case 'extraSmall':
         return {height: 24, width: 24};
       case 'small':
-        return {height: 64, width: 64};
+        return {height: 72, width: 72};
       case 'normal':
         return {height: 164, width: 164};
       default:
-        return {height: 64, width: 64};
+        return {height: 72, width: 72};
     }
   }, [size]);
 

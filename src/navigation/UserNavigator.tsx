@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Empty, UserDetailScreen} from '@/screens';
+import {Empty, UserDetailScreen, UserListScreen} from '@/screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Routes} from './Routes';
 
@@ -12,7 +12,7 @@ const UserStack = createStackNavigator<UserStackParamList>();
 
 export const UserNavigator = () => {
   return (
-    <UserStack.Navigator>
+    <UserStack.Navigator screenOptions={{headerShown: false}}>
       <UserStack.Screen
         name={Routes.USER_DETAIL}
         component={UserDetailScreen}

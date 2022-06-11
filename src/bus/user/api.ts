@@ -3,6 +3,10 @@ import {AxiosPromise} from 'axios';
 import {User} from './namespace';
 
 export const apiUser = new (class Api {
+  fetchItems(params: User.ReqFetchItems): AxiosPromise<User.ResFetchItems> {
+    return axios({url: '/user/all', method: 'get', params});
+  }
+
   fetchDetail(): AxiosPromise<User.ResFetchDetail> {
     return axios({url: '/user', method: 'get'});
   }
