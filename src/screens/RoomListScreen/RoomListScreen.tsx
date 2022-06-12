@@ -18,7 +18,7 @@ import {useStyles} from './useStyles';
 type TProps = StackScreenProps<RoomStackParams, Routes.ROOMS_LIST>;
 
 export const RoomListScreen: FC<TProps> = ({navigation}) => {
-  const {rooms, isLoading} = useData();
+  const {rooms, isLoading, onRemove} = useData();
   const {styles} = useStyles();
 
   return (
@@ -47,6 +47,7 @@ export const RoomListScreen: FC<TProps> = ({navigation}) => {
         ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
         renderItem={({item}) => (
           <RoomCard
+            onRemove={() => onRemove(item._id)}
             room={item}
             onPress={() =>
               navigation.navigate(Routes.ROOM_DETAIL, {id: item._id})

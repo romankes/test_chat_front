@@ -24,6 +24,8 @@ export const RoomNavigator = () => {
         command: 'subscribe',
         event: 'create_message',
         handler: (data) => {
+          console.log(data);
+
           dispatch(messageActions.processItemAsync(data));
         },
       }),

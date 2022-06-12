@@ -18,5 +18,9 @@ export const useData = () => {
     onBootstrap();
   }, [onBootstrap]);
 
-  return {rooms, isLoading};
+  const onRemove = useCallback((id: string) => {
+    dispatch(roomActions.removeItemAsync({id}));
+  }, []);
+
+  return {rooms, isLoading, onRemove};
 };

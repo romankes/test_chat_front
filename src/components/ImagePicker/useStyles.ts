@@ -19,12 +19,14 @@ export const useStyles = () => {
 
         content: {
           paddingVertical: 20,
-          paddingHorizontal: 16,
+          paddingHorizontal: 24,
         },
         button: {
           flexDirection: 'row',
           alignItems: 'center',
           height: 32,
+
+          marginBottom: 12,
         },
       }),
     [pallete],

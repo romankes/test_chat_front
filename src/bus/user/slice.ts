@@ -45,6 +45,10 @@ export const userActions = {
     type: types.UPDATE_DETAIL,
     payload,
   }),
+  updateDeviceTokenAsync: (payload: string): UserActionTypes => ({
+    type: types.UPDATE_DEVICE_TOKEN,
+    payload,
+  }),
   fetchDetailAsync: (): UserActionTypes => ({
     type: types.FETCH_DETAIL,
   }),

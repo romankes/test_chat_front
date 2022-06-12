@@ -51,6 +51,8 @@ export const useSocket = () => {
 
   const onUpdateListeners = useCallback(() => {
     if (socket && watingListeners.length) {
+      console.log(watingListeners);
+
       watingListeners.forEach((item) => {
         if (item.command === 'subscribe') {
           socket.on(item.event, item.handler);

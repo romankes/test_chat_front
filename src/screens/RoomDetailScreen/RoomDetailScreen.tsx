@@ -1,17 +1,28 @@
 import {
   AttachIcon,
+  Avatar,
+  BackArrowIcon,
+  DotsIcon,
   FilledField,
   Header,
   Loader,
   MessageCard,
   SendIcon,
+  Text,
+  ImagePicker,
 } from '@/components';
 import {Routes} from '@/navigation';
 import {RoomStackParams} from '@/navigation/RoomNavigator';
 import {StackScreenProps} from '@react-navigation/stack';
 import React, {FC, useEffect, useLayoutEffect, useRef} from 'react';
 import {Controller} from 'react-hook-form';
-import {FlatList, SafeAreaView, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useData} from './useData';
 import {useStyles} from './useStyles';
 
@@ -20,27 +31,62 @@ type TProps = StackScreenProps<RoomStackParams, Routes.ROOM_DETAIL>;
 export const RoomDetailScreen: FC<TProps> = ({navigation, route}) => {
   const {id} = route.params;
 
-  const {detail, isLoading, messages, user, control, handleSubmit} = useData({
+  const {
+    detail,
+    isLoading,
+    messages,
+    user,
+    control,
+    handleSubmit,
+    actionsheetRef,
+  } = useData({
     id,
   });
   const {styles} = useStyles();
 
   const flatListRef = useRef<FlatList>(null);
 
-  useLayoutEffect(() => {
-    if (messages.length) {
-      flatListRef.current?.scrollToEnd();
-    }
-  }, [messages, flatListRef]);
-
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Header />
+      <View style={styles.header}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <BackArrowIcon color="default" size={22} />
+        </Pressable>
+
+        {detail && (
+          <View style={styles.headerMain}>
+            <Avatar
+              url={null}
+              size="small"
+              variant="round"
+              letter={detail?.title[0]}
+            />
+            <View style={styles.headerInfo}>
+              <Text family="bold">{detail?.title}</Text>
+              <Text margin={{top: 4}} family="light">
+                {detail?.users.length} peoples ({' '}
+                <Text family="light" color="link">
+                  {detail?.users.filter(({online}) => online).length} online
+                </Text>{' '}
+                )
+              </Text>
+            </View>
+          </View>
+        )}
+        <View>
+          <Pressable style={styles.headerRightIcon}>
+            <DotsIcon size={22} color="default" />
+          </Pressable>
+        </View>
+      </View>
       <FlatList
         ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
         ref={flatListRef}
-        style={styles.container}
+        contentContainerStyle={styles.container}
         data={messages}
+        onContentSizeChange={() => {
+          flatListRef.current?.scrollToEnd();
+        }}
         renderItem={({item}) => (
           <MessageCard
             message={item}
@@ -59,7 +105,9 @@ export const RoomDetailScreen: FC<TProps> = ({navigation, route}) => {
               onChangeText={onChange}
               onBlur={onBlur}
               leftIcon={
-                <TouchableOpacity activeOpacity={0.6}>
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={() => actionsheetRef.current?.show()}>
                   <AttachIcon size={24} color="light" />
                 </TouchableOpacity>
               }
@@ -75,6 +123,7 @@ export const RoomDetailScreen: FC<TProps> = ({navigation, route}) => {
           )}
         />
       </View>
+      <ImagePicker actionSheetRef={actionsheetRef} onUploadItems={() => {}} />
     </SafeAreaView>
   );
 };

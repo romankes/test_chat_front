@@ -33,4 +33,11 @@ export const apiUser = new (class Api {
       data: fd,
     });
   }
+  updateDeviceToken(token: string): AxiosPromise {
+    return axios({
+      url: '/user/deviceToken',
+      method: 'put',
+      data: {token},
+    });
+  }
 })();

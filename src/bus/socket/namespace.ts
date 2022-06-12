@@ -13,7 +13,7 @@ export namespace Socket {
     data: EmitData<any>;
   };
 
-  export type EventEmitNames = '';
+  export type EventEmitNames = 'remove_current_room';
   export type EmitData<T> = T;
 
   export type EventListenerNames = 'disconnect' | 'create_message';

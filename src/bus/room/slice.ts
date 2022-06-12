@@ -6,6 +6,8 @@ import {Room} from './';
 const initialState: RoomState = {
   items: [],
   detail: null,
+
+  users: [],
 };
 
 const slice = createSlice({
@@ -25,6 +27,26 @@ const slice = createSlice({
     clearDeatil: (state: RoomState) => {
       state.detail = null;
     },
+
+    saveUsers: (state: RoomState, action: PayloadAction<Room.User[]>) => {
+      state.users = action.payload;
+    },
+    clearUsers: (state: RoomState) => {
+      state.users = [];
+    },
+
+    removeItem: (
+      state: RoomState,
+      action: PayloadAction<Room.ResRemoveItem>,
+    ) => {
+      state.items = state.items.filter(({_id}) => _id !== action.payload.room);
+    },
+    createItem: (
+      state: RoomState,
+      action: PayloadAction<Room.ResCreateItem>,
+    ) => {
+      state.items = [action.payload.room, ...state.items];
+    },
   },
 });
 
@@ -38,6 +60,15 @@ export const roomActions = {
   }),
   fetchDetailAsync: (payload: Room.ReqFetchDetail): RoomActionTypes => ({
     type: types.FETCH_DETAIL,
+    payload,
+  }),
+
+  createItemAsync: (payload: Room.ReqCreateItem): RoomActionTypes => ({
+    type: types.CREATE_ITEM,
+    payload,
+  }),
+  removeItemAsync: (payload: Room.ReqRemoveItem): RoomActionTypes => ({
+    type: types.REMOVE_ITEM,
     payload,
   }),
 };

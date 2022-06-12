@@ -15,6 +15,7 @@ type TProps = {
     left?: number;
   };
   letter?: string;
+  center?: boolean;
 };
 
 export const Avatar: FC<TProps> = ({
@@ -23,6 +24,7 @@ export const Avatar: FC<TProps> = ({
   variant = 'sqaure',
   margin,
   letter,
+  center = false,
 }) => {
   const {styles} = useStyles();
 
@@ -61,7 +63,14 @@ export const Avatar: FC<TProps> = ({
   }, [variant]);
 
   return (
-    <View style={[styles.wrapper, sizeData, margins, {borderRadius}]}>
+    <View
+      style={[
+        styles.wrapper,
+        sizeData,
+        margins,
+        {borderRadius},
+        center && {alignSelf: 'center'},
+      ]}>
       {url ? (
         <Image style={styles.image} source={{uri: url}} />
       ) : (

@@ -1,25 +1,29 @@
 import React, {FC} from 'react';
 import {User} from '@/bus/user';
-import {Text, Avatar} from '@/components';
+import {Text, Avatar, CheckmarkIcon} from '@/components';
 
 import {TouchableOpacity, View} from 'react-native';
 import {useStyles} from './useStyles';
 
+import ENV from '@/configs';
+
 type TProps = {
   user: User.Item;
   onPress: () => any;
+
+  isSelected: boolean;
 };
 
-export const UserCard: FC<TProps> = ({user, onPress}) => {
+export const UserCard: FC<TProps> = ({user, onPress, isSelected}) => {
   const {styles} = useStyles();
 
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.8}
-      style={styles.wrapper}>
+      style={[styles.wrapper, isSelected && styles.active]}>
       <Avatar
-        url={null}
+        url={user && user.avatar && `${ENV.BASE_URL}/${user?.avatar}`}
         letter={user.username[0]}
         size="small"
         variant="round"
@@ -39,6 +43,11 @@ export const UserCard: FC<TProps> = ({user, onPress}) => {
           {user.email}
         </Text>
       </View>
+      {isSelected && (
+        <View style={styles.checkbox}>
+          <CheckmarkIcon color="light" size={18} />
+        </View>
+      )}
       {/* <View style={styles.info}>
 
           <Text family="light" color="action">

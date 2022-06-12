@@ -11,7 +11,10 @@ export namespace Room {
     users: User.Detail[];
 
     message: Message.Item | null;
+    notReadCount: number;
   };
+
+  export type User = User.Item;
 
   export type Detail = Item;
 
@@ -27,4 +30,17 @@ export namespace Room {
     room: Detail;
     messages: Message.Item[];
   };
+
+  export type ReqCreateItem = {
+    title: string;
+    users: string[];
+  };
+  export type ResCreateItem = {
+    room: Room.Item;
+  };
+
+  export type ReqRemoveItem = {
+    id: string;
+  };
+  export type ResRemoveItem = {room: string};
 }

@@ -17,4 +17,19 @@ export const apiRoom = new (class Api {
       method: 'get',
     });
   }
+
+  createItem(data: Room.ReqCreateItem): AxiosPromise<Room.ResCreateItem> {
+    return axios({
+      url: '/room',
+      method: 'post',
+      data,
+    });
+  }
+
+  removeItem({id}: Room.ReqRemoveItem): AxiosPromise<Room.ResRemoveItem> {
+    return axios({
+      url: `/room/${id}`,
+      method: 'delete',
+    });
+  }
 })();

@@ -25,6 +25,7 @@ export const useStyles = () => {
           },
           elevation: 5,
         },
+        active: {},
         content: {
           paddingVertical: 16,
           paddingRight: 32,
@@ -41,6 +42,21 @@ export const useStyles = () => {
           paddingVertical: 16,
 
           justifyContent: 'space-between',
+        },
+        checkbox: {
+          borderWidth: 1,
+          borderColor: pallete.border.default,
+          borderRadius: 8,
+
+          height: 28,
+          width: 28,
+          backgroundColor: pallete.background.action,
+
+          alignSelf: 'flex-start',
+          justifyContent: 'center',
+          alignItems: 'center',
+
+          marginTop: 16,
         },
       }),
     [pallete],

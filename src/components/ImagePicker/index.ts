@@ -1,1 +1,1 @@
-export {} from './ImagePicker';
+export {ImagePicker} from './ImagePicker';

@@ -1,4 +1,4 @@
-package com.test_chat;
+package com.void_chat;
 
 import android.app.Application;
 import android.content.Context;

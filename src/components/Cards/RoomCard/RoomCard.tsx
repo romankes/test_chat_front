@@ -11,9 +11,10 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 type TProps = {
   room: Room.Item;
   onPress: () => any;
+  onRemove: () => any;
 };
 
-export const RoomCard: FC<TProps> = ({onPress, room}) => {
+export const RoomCard: FC<TProps> = ({onPress, room, onRemove}) => {
   const {styles} = useStyles();
 
   const renderName = useMemo(() => {
@@ -43,6 +44,7 @@ export const RoomCard: FC<TProps> = ({onPress, room}) => {
     <Swipeable
       renderRightActions={renderRightActions}
       rightThreshold={200}
+      onSwipeableOpen={onRemove}
       overshootRight={false}>
       <Pressable style={styles.wrapper} onPress={onPress}>
         <Avatar
@@ -64,11 +66,13 @@ export const RoomCard: FC<TProps> = ({onPress, room}) => {
           </Text>
         </View>
         <View style={styles.info}>
-          <View style={styles.counter}>
-            <Text color="light" size={10}>
-              0
-            </Text>
-          </View>
+          {!!room.notReadCount && (
+            <View style={styles.counter}>
+              <Text color="light" size={10}>
+                {room.notReadCount}
+              </Text>
+            </View>
+          )}
           <Text family="light" color="action">
             {format(new Date(room.createdAt), 'HH:mm')}
           </Text>

@@ -19,6 +19,7 @@ export const useStyles = () => {
         form: {
           flex: 1,
         },
+
         container: {
           paddingHorizontal: 16,
         },

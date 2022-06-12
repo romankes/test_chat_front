@@ -1,10 +1,12 @@
 import {messageSelectors, messageActions} from '@/bus/message';
 import {roomActions, roomSelectors} from '@/bus/room';
+import {socketActions} from '@/bus/socket';
 import {uiSelectors} from '@/bus/ui';
 import {userSelectors} from '@/bus/user';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {useCallback, useEffect, useMemo} from 'react';
+import {useCallback, useEffect, useMemo, useRef} from 'react';
 import {useForm} from 'react-hook-form';
+import ActionSheet from 'react-native-actions-sheet';
 import {useDispatch, useSelector} from 'react-redux';
 import {schema} from './validate';
 
@@ -15,8 +17,9 @@ type TArgs = {
 export const useData = ({id}: TArgs) => {
   const dispatch = useDispatch();
 
-  const user = useSelector(userSelectors.getDetail);
+  const actionsheetRef = useRef<ActionSheet>(null);
 
+  const user = useSelector(userSelectors.getDetail);
   const detail = useSelector(roomSelectors.getDetail);
   const messages = useSelector(messageSelectors.getItems);
   const waitingMessages = useSelector(messageSelectors.getWaitingItems);
@@ -58,6 +61,18 @@ export const useData = ({id}: TArgs) => {
     return [...messages, ...waitingMessages];
   }, [messages, waitingMessages]);
 
+  useEffect(() => {
+    return () => {
+      console.log('unmount');
+      dispatch(
+        socketActions.createEventEmitItem({
+          event: 'remove_current_room',
+          data: {},
+        }),
+      );
+    };
+  }, []);
+
   return {
     isLoading,
     messages: messagesData,
@@ -65,5 +80,6 @@ export const useData = ({id}: TArgs) => {
     user,
     control,
     handleSubmit: handleSubmit(onSubmit),
+    actionsheetRef,
   };
 };

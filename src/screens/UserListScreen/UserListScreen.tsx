@@ -3,6 +3,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 
 import {
   Avatar,
+  CheckmarkIcon,
   CloseIcon,
   FilledField,
   Loader,
@@ -20,6 +21,7 @@ import {
   TouchableOpacity,
   View,
   FlatList,
+  Pressable,
 } from 'react-native';
 import {useData} from './useData';
 
@@ -30,23 +32,40 @@ type TProps = StackScreenProps<RoomCreateStackParamList, Routes.USER_LIST>;
 export const UserListScreen: FC<TProps> = ({navigation}) => {
   const {styles} = useStyles();
 
-  const {users, setValue, value, isLoading, onLoad} = useData();
+  const {
+    users,
+    setValue,
+    value,
+    isLoading,
+    onLoad,
+    ids,
+    onSelectUser,
+    onSaveUsers,
+  } = useData();
 
   const renderHeader = useMemo(
     () => (
       <View style={styles.header}>
         <FilledField
           leftIcon={
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => navigation.goBack()}>
+            <Pressable onPress={() => navigation.goBack()}>
               <CloseIcon color="light" size={16} />
-            </TouchableOpacity>
+            </Pressable>
           }
           rightIcon={
-            <TouchableOpacity>
-              <SearchIcon color="light" size={16} />
-            </TouchableOpacity>
+            <Pressable
+              onPress={() => {
+                if (ids.length) {
+                  onSaveUsers();
+                  navigation.goBack();
+                }
+              }}>
+              {!ids.length ? (
+                <SearchIcon color="light" size={16} />
+              ) : (
+                <CheckmarkIcon color="light" size={16} />
+              )}
+            </Pressable>
           }
           error={undefined}
           errorEmpty
@@ -56,7 +75,7 @@ export const UserListScreen: FC<TProps> = ({navigation}) => {
         />
       </View>
     ),
-    [value],
+    [value, ids],
   );
 
   return (
@@ -67,7 +86,13 @@ export const UserListScreen: FC<TProps> = ({navigation}) => {
         ListHeaderComponent={renderHeader}
         ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
         keyExtractor={(user) => `user-${user._id}`}
-        renderItem={({item}) => <UserCard onPress={() => {}} user={item} />}
+        renderItem={({item}) => (
+          <UserCard
+            isSelected={ids.includes(item._id)}
+            onPress={() => onSelectUser(item._id)}
+            user={item}
+          />
+        )}
       />
     </SafeAreaView>
   );

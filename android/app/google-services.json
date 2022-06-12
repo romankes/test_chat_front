@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "268230991780",
+    "project_id": "void-chat-e6153",
+    "storage_bucket": "void-chat-e6153.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268230991780:android:341b0236c2126202aaab31",
+        "android_client_info": {
+          "package_name": "com.void_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268230991780-6rs106knk3oo4ait18d73mavps97ft5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiOKETKPYx9PmibOvz-sRSN0hhZHJyjrc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268230991780-6rs106knk3oo4ait18d73mavps97ft5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

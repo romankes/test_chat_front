@@ -17,7 +17,7 @@ import {io} from 'socket.io-client';
 import ENV from '@/configs';
 import {navigationRef} from './RootNavigation';
 import {TabNavigator} from './TabNavigator';
-import {useSocket} from '@/hooks';
+import {usePush, useSocket} from '@/hooks';
 
 export type AppStackParamList = {
   [Routes.AUTH_NAVIGATOR]: undefined;
@@ -43,6 +43,7 @@ export const AppNavigator: FC = () => {
   }, [initalized]);
 
   const socket = useSocket();
+  usePush();
 
   if (!initalized) return null;
   return (

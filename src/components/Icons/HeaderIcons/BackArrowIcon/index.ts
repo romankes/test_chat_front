@@ -1,0 +1,1 @@
+export {BackArrowIcon} from './BackArrowIcon';
