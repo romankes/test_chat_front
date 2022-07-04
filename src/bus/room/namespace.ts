@@ -16,7 +16,9 @@ export namespace Room {
 
   export type User = User.Item;
 
-  export type Detail = Item;
+  export type Detail = Item & {
+    messages: Message.Item[];
+  };
 
   export type ReqFetchItems = {};
   export type ResFetchItems = {
@@ -28,7 +30,6 @@ export namespace Room {
   };
   export type ResFetchDetail = {
     room: Detail;
-    messages: Message.Item[];
   };
 
   export type ReqCreateItem = {

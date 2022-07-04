@@ -8,7 +8,7 @@ import {Socket} from 'socket.io-client';
 export const useSocket = () => {
   const dispatch = useDispatch();
 
-  const token = useSelector(authSelectors.getToken);
+  const loggined = useSelector(authSelectors.getLoggined);
 
   const [socket, setSocket] = useState<Socket | null>(null);
 
@@ -29,12 +29,12 @@ export const useSocket = () => {
   }, [onEmit]);
 
   const onConnect = useCallback(() => {
-    if (token) {
-      return createSocket(token);
+    if (loggined) {
+      return createSocket();
     }
 
     return null;
-  }, [token]);
+  }, [loggined]);
 
   useEffect(() => {
     setSocket(onConnect());

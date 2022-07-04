@@ -48,7 +48,7 @@ export const useData = ({id}: TArgs) => {
     if (id) {
       dispatch(
         messageActions.createItemAsync({
-          room_id: id,
+          roomId: id,
           ...data,
         }),
       );

@@ -4,40 +4,42 @@ import {User} from './namespace';
 
 export const apiUser = new (class Api {
   fetchItems(params: User.ReqFetchItems): AxiosPromise<User.ResFetchItems> {
-    return axios({url: '/user/all', method: 'get', params});
+    return axios({url: '/users', method: 'get', params});
   }
 
   fetchDetail(): AxiosPromise<User.ResFetchDetail> {
-    return axios({url: '/user', method: 'get'});
+    return axios({url: '/users/info', method: 'get'});
   }
 
   updateDetail(data: User.ReqUpdateDetail): AxiosPromise<User.ReqUpdateDetail> {
     const fd = new FormData();
 
+    console.log(data);
+
     if (data.avatar) {
       fd.append('avatar', {
         uri: data.avatar.uri,
-        name: data.avatar.uri?.replace(/(.*\/)/gi, ''),
+        name: data.avatar.fileName,
         type: data.avatar.type,
       });
     }
 
-    fd.append('username', data.username);
+    fd.append('name', data.name);
 
     return axios({
-      url: '/user',
-      method: 'put',
+      url: '/users',
+      method: 'patch',
       headers: {
         'Content-Type': 'multipart/form-data',
       },
       data: fd,
     });
   }
-  updateDeviceToken(token: string): AxiosPromise {
+  updateDeviceToken(deviceToken: string): AxiosPromise {
     return axios({
-      url: '/user/deviceToken',
+      url: '/users',
       method: 'put',
-      data: {token},
+      data: {deviceToken},
     });
   }
 })();

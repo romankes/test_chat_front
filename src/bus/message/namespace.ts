@@ -13,6 +13,7 @@ export namespace Message {
 
   export type WaitingItem = {
     _id: number;
+    updatedAt?: string;
     createdAt: string;
     text: string;
     user: null;
@@ -27,7 +28,7 @@ export namespace Message {
   export type ReqCreateItem = {
     text: string;
 
-    room_id: string;
+    roomId: string;
   };
   export type ResCreateItem = {
     message: Message.Item;

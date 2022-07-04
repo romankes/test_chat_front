@@ -27,11 +27,11 @@ export const apiAuth = new (class Api {
       }
     });
   }
-  signIn(data: Auth.ReqSignIn): AxiosPromise<Auth.ResSignIn> {
-    return axios({url: '/auth/sign_in', method: 'post', data});
+  signIn(user: Auth.ReqSignIn): AxiosPromise<Auth.ResSignIn> {
+    return axios({url: '/auth/signIn', method: 'post', data: {user}});
   }
-  signUp(data: Auth.ReqSignUp): AxiosPromise<Auth.ResSignUp> {
-    return axios({url: '/auth/sign_up', method: 'post', data});
+  signUp(user: Auth.ReqSignUp): AxiosPromise<Auth.ResSignUp> {
+    return axios({url: '/auth/signUp', method: 'post', data: {user}});
   }
   logout(): AxiosPromise<Auth.ResSignUp> {
     return axios({url: '/auth/logout', method: 'delete'});

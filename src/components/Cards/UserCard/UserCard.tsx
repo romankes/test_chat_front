@@ -24,13 +24,13 @@ export const UserCard: FC<TProps> = ({user, onPress, isSelected}) => {
       style={[styles.wrapper, isSelected && styles.active]}>
       <Avatar
         url={user && user.avatar && `${ENV.BASE_URL}/${user?.avatar}`}
-        letter={user.username[0]}
+        letter={user.name[0]}
         size="small"
         variant="round"
       />
       <View style={styles.content}>
         <Text family="medium" size={14} numberOfLines={1} ellipsizeMode="tail">
-          {user.username}
+          {user.name}
         </Text>
         <Text size={12} numberOfLines={1} color="action" ellipsizeMode="tail">
           {user.online ? 'Online' : 'Offline'}

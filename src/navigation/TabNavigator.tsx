@@ -10,6 +10,7 @@ import {UserNavigator} from './UserNavigator';
 import {useTabBarState, useTheme} from '@/hooks';
 import {ChatIcon, ProfileIcon, RoomCreateIcon} from '@/components';
 import {RoomCreateNavigator} from './RoomCreateNavigator';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export type TabStackParamList = {
   [Routes.USER_NAVIGATOR]: undefined;
@@ -24,6 +25,8 @@ export const TabNavigator = () => {
 
   const {pallete} = useTheme();
 
+  const insets = useSafeAreaInsets();
+
   return (
     <TabStack.Navigator
       screenOptions={{
@@ -31,8 +34,8 @@ export const TabNavigator = () => {
         tabBarStyle: {
           display: isShow ? 'flex' : 'none',
           backgroundColor: pallete.background.gray,
-          height: 64,
-          paddingBottom: 8,
+          height: 64 + insets.bottom,
+          paddingBottom: 8 + insets.bottom,
         },
       }}>
       <TabStack.Screen

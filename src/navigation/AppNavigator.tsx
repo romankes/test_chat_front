@@ -31,7 +31,7 @@ const AppStack = createStackNavigator<AppStackParamList>();
 export const AppNavigator: FC = () => {
   const dispatch = useDispatch();
 
-  const token = useSelector(authSelectors.getToken);
+  const loggined = useSelector(authSelectors.getLoggined);
   const initalized = useSelector(appSelectors.getInitialized);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const AppNavigator: FC = () => {
   }, [initalized]);
 
   const socket = useSocket();
-  usePush();
+  // usePush();
 
   if (!initalized) return null;
   return (
@@ -57,7 +57,9 @@ export const AppNavigator: FC = () => {
         },
       }}>
       <AppStack.Navigator
-        initialRouteName={token ? Routes.TABS_NAVIGATOR : Routes.AUTH_NAVIGATOR}
+        initialRouteName={
+          loggined ? Routes.TABS_NAVIGATOR : Routes.AUTH_NAVIGATOR
+        }
         screenOptions={{
           headerShown: false,
         }}>

@@ -1,6 +1,6 @@
 import {userActions} from '@/bus/user';
 import {AxiosResponse} from 'axios';
-import {all, put, call, take} from 'redux-saga/effects';
+import {put, call, take} from 'redux-saga/effects';
 import {uiActions} from '@/bus/ui';
 import {SagaIterator} from 'redux-saga';
 import {SignInAsync, types} from '../../types';
@@ -19,15 +19,14 @@ export function* signIn(action: SignInAsync): SagaIterator {
       action.payload,
     );
 
-    if (response.data.token) {
-      yield put(authActions.updateTokenAsync(response.data.token));
-      yield take(types.END_UPDATE_TOKEN);
+    if (response.headers['set-cookie'].length) {
+      yield put(authActions.toggleloggined(false));
 
       yield put(userActions.fetchDetailAsync());
       yield take(userTypes.END_FETCH_DETAIL);
-
-      navigate(Routes.TABS_NAVIGATOR);
     }
+
+    navigate(Routes.TABS_NAVIGATOR);
   } catch (e) {
     console.log(`error sign in worker ${e}`);
   } finally {

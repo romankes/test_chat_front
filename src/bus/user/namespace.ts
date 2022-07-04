@@ -5,7 +5,7 @@ export namespace User {
     email: string;
     avatar: string;
     online: boolean;
-    username: string;
+    name: string;
     _id: string;
   };
 
@@ -16,18 +16,19 @@ export namespace User {
   };
 
   export type ReqFetchItems = {
-    username: string;
+    name: string;
     page: number;
     per: number;
   };
   export type ResFetchItems = {
     users: Item[];
-    totalPage: number;
+    totalCount: number;
     currentPage: number;
+    per: number;
   };
 
   export type ReqUpdateDetail = {
-    username: string;
+    name: string;
     avatar: Asset | null;
   };
 

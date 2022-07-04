@@ -43,7 +43,6 @@ export const ImagePicker: FC<TProps> = ({
 
   const onOpenGallery = async () => {
     if (actionSheetRef.current) {
-      actionSheetRef.current.hide();
       const response = await launchImageLibrary({
         quality: 1,
         mediaType: 'photo',
@@ -52,6 +51,8 @@ export const ImagePicker: FC<TProps> = ({
       if (!response.didCancel && response.assets && response.assets.length) {
         onUploadItems(response.assets);
       }
+
+      actionSheetRef.current.hide();
     }
   };
 

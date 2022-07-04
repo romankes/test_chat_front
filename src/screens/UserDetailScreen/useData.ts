@@ -1,4 +1,6 @@
+import {authActions} from '@/bus/auth';
 import {userSelectors} from '@/bus/user';
+import {useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 export const useData = () => {
@@ -6,5 +8,9 @@ export const useData = () => {
 
   const user = useSelector(userSelectors.getDetail);
 
-  return {user};
+  const onLoggout = useCallback(() => {
+    dispatch(authActions.logoutAsync());
+  }, []);
+
+  return {user, onLoggout};
 };

@@ -1,3 +1,3 @@
 import {RootState} from '@/store/rootReducer';
 
-export const getToken = (state: RootState) => state.auth.token;
+export const getLoggined = (state: RootState) => state.auth.loggined;

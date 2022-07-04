@@ -4,11 +4,9 @@ import {io} from 'socket.io-client';
 
 import ENV from '@/configs';
 
-export const createSocket = (token: string) => {
+export const createSocket = () => {
   const socket = io(ENV.BASE_URL, {
-    auth: {
-      token: `Bearer ${token}`,
-    },
+    withCredentials: true,
   });
 
   return socket;

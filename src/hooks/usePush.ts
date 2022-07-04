@@ -15,10 +15,10 @@ type TData = {
 export const usePush = () => {
   const dispatch = useDispatch();
 
-  const token = useSelector(authSelectors.getToken);
+  const loggined = useSelector(authSelectors.getLoggined);
 
   const onSetupMessaging = useCallback(async () => {
-    if (token) {
+    if (loggined) {
       const deviceToken = await messaging().getToken();
 
       if (deviceToken) {
@@ -39,7 +39,7 @@ export const usePush = () => {
         });
       }
     }
-  }, [token]);
+  }, [loggined]);
 
   useEffect(() => {
     onSetupMessaging();

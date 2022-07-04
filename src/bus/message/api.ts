@@ -4,7 +4,7 @@ import {AxiosPromise} from 'axios';
 export const apiMessage = new (class Api {
   createItem(data: Message.ReqCreateItem): AxiosPromise<Message.ResCreateItem> {
     return axios({
-      url: '/message',
+      url: '/messages',
       method: 'post',
       data,
     });

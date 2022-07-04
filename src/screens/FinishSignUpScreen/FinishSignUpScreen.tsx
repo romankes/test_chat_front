@@ -32,14 +32,14 @@ export const FinishSignUpScreen = () => {
 
           <Controller
             control={control}
-            name="username"
+            name="name"
             render={({field: {name, onBlur, onChange, value}}) => (
               <FilledField
                 error={errors[name]}
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                label="Username"
+                label="name"
               />
             )}
           />

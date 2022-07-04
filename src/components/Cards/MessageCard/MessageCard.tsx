@@ -42,7 +42,7 @@ export const MessageCard: FC<TProps> = ({message, isMy}) => {
               numberOfLines={1}
               ellipsizeMode="tail"
               size={14}>
-              {message.user.username}
+              {message.user.name}
             </Text>
             <Text color="action" size={10} family="light">
               {format(new Date(message.createdAt), 'HH:mm')}

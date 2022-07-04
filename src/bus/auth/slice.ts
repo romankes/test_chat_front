@@ -4,15 +4,15 @@ import {AuthState, types, AuthActionTypes} from './types';
 import {Auth} from './namespace';
 
 const initialState: AuthState = {
-  token: null,
+  loggined: false,
 };
 
 const slice = createSlice({
   name: 'Auth',
   initialState,
   reducers: {
-    saveToken: (state: AuthState, action: PayloadAction<string>) => {
-      state.token = action.payload;
+    toggleloggined: (state: AuthState, action: PayloadAction<boolean>) => {
+      state.loggined = action.payload;
     },
   },
 });
@@ -21,9 +21,7 @@ export default slice.reducer;
 
 export const authActions = {
   ...slice.actions,
-  fetchTokenAsync: (): AuthActionTypes => ({
-    type: types.FETCH_TOKEN,
-  }),
+
   signInAsync: (payload: Auth.ReqSignIn): AuthActionTypes => ({
     type: types.SIGN_IN,
     payload,
@@ -34,9 +32,5 @@ export const authActions = {
   }),
   logoutAsync: (): AuthActionTypes => ({
     type: types.LOGOUT,
-  }),
-  updateTokenAsync: (payload: string): AuthActionTypes => ({
-    type: types.UPDATE_TOKEN,
-    payload,
   }),
 };

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 
-import {Avatar, CloseIcon, Text} from '@/components';
+import {Avatar, Button, CloseIcon, Text} from '@/components';
 import {Routes} from '@/navigation';
 import {UserStackParamList} from '@/navigation/UserNavigator';
 import ENV from '@/configs';
@@ -16,9 +16,7 @@ type TProps = StackScreenProps<UserStackParamList, Routes.USER_DETAIL>;
 export const UserDetailScreen: FC<TProps> = ({navigation}) => {
   const {styles} = useStyles();
 
-  const {user} = useData();
-
-  console.log(user);
+  const {user, onLoggout} = useData();
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -39,11 +37,11 @@ export const UserDetailScreen: FC<TProps> = ({navigation}) => {
               size="small"
               variant="round"
               url={user && user.avatar && `${ENV.BASE_URL}/${user?.avatar}`}
-              letter={user?.username[0]}
+              letter={user?.name[0]}
             />
             <View style={styles.headerMainInfo}>
               <Text color="light" size={14} family="medium">
-                {user?.username || ''}
+                {user?.name || ''}
               </Text>
               <Text color="link" margin={{top: 8}} family="light">
                 {user?.email}
@@ -56,6 +54,9 @@ export const UserDetailScreen: FC<TProps> = ({navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={[styles.container, {marginTop: 8}]}></ScrollView>
+      <View style={styles.footer}>
+        <Button onPress={onLoggout}>Loggout</Button>
+      </View>
     </SafeAreaView>
   );
 };

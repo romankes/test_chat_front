@@ -5,7 +5,7 @@ import {Room} from './namespace';
 export const apiRoom = new (class Api {
   fetchItems(params: Room.ReqFetchItems): AxiosPromise<Room.ResFetchItems> {
     return axios({
-      url: '/room',
+      url: '/rooms',
       method: 'get',
       params,
     });
@@ -13,22 +13,22 @@ export const apiRoom = new (class Api {
 
   fetchDetail({id}: Room.ReqFetchDetail): AxiosPromise<Room.ResFetchDetail> {
     return axios({
-      url: `/room/${id}`,
+      url: `/rooms/${id}`,
       method: 'get',
     });
   }
 
-  createItem(data: Room.ReqCreateItem): AxiosPromise<Room.ResCreateItem> {
+  createItem(room: Room.ReqCreateItem): AxiosPromise<Room.ResCreateItem> {
     return axios({
-      url: '/room',
+      url: '/rooms',
       method: 'post',
-      data,
+      data: {room},
     });
   }
 
   removeItem({id}: Room.ReqRemoveItem): AxiosPromise<Room.ResRemoveItem> {
     return axios({
-      url: `/room/${id}`,
+      url: `/rooms/${id}`,
       method: 'delete',
     });
   }

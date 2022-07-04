@@ -11,13 +11,11 @@ export function* logout(): SagaIterator {
   try {
     yield put(uiActions.toggleLoader({name: 'logout', loading: true}));
 
-    const response = yield call(apiAuth.logout);
+    // const response = yield call(apiAuth.logout);
 
-    yield put(authActions.updateTokenAsync(''));
+    yield put(authActions.toggleloggined(false));
 
-    yield take(types.END_UPDATE_TOKEN);
-
-    navigate(Routes.AUTH);
+    navigate(Routes.AUTH_NAVIGATOR);
   } catch (e) {
     console.log(`error logout worker ${e}`);
   } finally {

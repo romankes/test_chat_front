@@ -8,6 +8,7 @@ import {apiAuth} from '../../api';
 import {authActions} from '../../slice';
 import {types as userTypes} from '@/bus/user/types';
 import {userActions} from '@/bus/user';
+import {navigate, Routes} from '@/navigation';
 
 export function* signUp(action: SignUpAsync): SagaIterator {
   try {
@@ -18,13 +19,10 @@ export function* signUp(action: SignUpAsync): SagaIterator {
       action.payload,
     );
 
-    if (response.data.token) {
-      yield put(authActions.updateTokenAsync(response.data.token));
-      yield take(types.END_UPDATE_TOKEN);
+    yield put(userActions.fetchDetailAsync());
+    yield take(userTypes.END_FETCH_DETAIL);
 
-      yield put(userActions.fetchDetailAsync());
-      yield take(userTypes.END_FETCH_DETAIL);
-    }
+    navigate(Routes.FINISH_SIGN_UP);
   } catch (e) {
     console.log(`error sign up worker ${e}`);
   } finally {

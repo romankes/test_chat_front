@@ -15,7 +15,7 @@ export const useData = () => {
   const [ids, setIds] = useState<string[]>([]);
   const [value, setValue] = useState('');
 
-  const username = useDebounce(value);
+  const name = useDebounce(value);
 
   const isLoading = useSelector(uiSelectors.getLoading('user'));
 
@@ -24,26 +24,28 @@ export const useData = () => {
       userActions.fetchItemsAsync({
         page: 1,
         per: 10,
-        username,
+        name,
       }),
     );
-  }, [username]);
+  }, [name]);
 
   useEffect(() => {
     onBootstrap();
   }, [onBootstrap]);
 
   const onLoad = useCallback(() => {
+    console.log(hasMore);
+
     if (hasMore && !isLoading) {
       dispatch(
         userActions.fetchItemsAsync({
           page: currentPage + 1,
           per: 10,
-          username,
+          name,
         }),
       );
     }
-  }, [currentPage, hasMore, isLoading, username]);
+  }, [currentPage, hasMore, isLoading, name]);
 
   const onSelectUser = useCallback(
     (id) => {

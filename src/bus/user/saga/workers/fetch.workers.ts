@@ -6,6 +6,7 @@ import {apiUser} from '../../api';
 import {AxiosResponse} from 'axios';
 import {User} from '../../namespace';
 import {userActions} from '../../slice';
+import {authActions} from '@/bus/auth';
 
 export function* fetchItems(action: FetchItemsAsync): SagaIterator {
   try {
@@ -16,12 +17,12 @@ export function* fetchItems(action: FetchItemsAsync): SagaIterator {
       action.payload,
     );
 
-    console.log(response.data);
     if (response.data) {
       yield put(
         userActions.saveItems({
           ...response.data,
           currentPage: action.payload.page,
+          per: action.payload.per,
         }),
       );
     }
@@ -39,7 +40,10 @@ export function* fetchDetail(): SagaIterator {
     );
 
     if (response.data.user) {
-      yield put(userActions.saveDetail(response.data.user));
+      yield all([
+        put(userActions.saveDetail(response.data.user)),
+        put(authActions.toggleloggined(true)),
+      ]);
     }
   } catch (e) {
     console.log(`error fetch user detail worker ${e}`);

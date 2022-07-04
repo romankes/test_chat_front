@@ -38,12 +38,17 @@ export function* fetchDetail(action: FetchDetailAsync): SagaIterator {
       action.payload,
     );
 
+    console.log(response.data);
+
     if (response.data) {
       yield all([
         put(roomActions.saveDetail(response.data.room)),
         put(
           messageActions.saveItems(
-            response.data.messages.map((item) => ({...item, status: 'sended'})),
+            response.data.room.messages.map((item) => ({
+              ...item,
+              status: 'sended',
+            })),
           ),
         ),
       ]);

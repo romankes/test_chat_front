@@ -25,8 +25,14 @@ const slice = createSlice({
         state.items = [...state.items, ...action.payload.users];
       }
 
+      console.log(action.payload);
+
+      const totalPage = Math.round(
+        action.payload.totalCount / action.payload.per,
+      );
+
       state.currentPage = action.payload.currentPage;
-      state.hasMore = action.payload.currentPage < action.payload.totalPage;
+      state.hasMore = action.payload.currentPage < totalPage;
     },
     saveDetail: (state: UserState, action: PayloadAction<User.Detail>) => {
       state.detail = action.payload;

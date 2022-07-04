@@ -16,7 +16,7 @@ export const useData = () => {
   } = useForm<User.ReqUpdateDetail>({
     defaultValues: {
       avatar: null,
-      username: '',
+      name: '',
     },
   });
 

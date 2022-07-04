@@ -20,7 +20,7 @@ export const RoomCard: FC<TProps> = ({onPress, room, onRemove}) => {
   const renderName = useMemo(() => {
     if (!room.title) {
       if (room.users.length) {
-        return room.users.map(({username}) => username).join(', ');
+        return room.users.map(({name}) => name).join(', ');
       }
 
       return `Anonim`;
@@ -74,7 +74,7 @@ export const RoomCard: FC<TProps> = ({onPress, room, onRemove}) => {
             </View>
           )}
           <Text family="light" color="action">
-            {format(new Date(room.createdAt), 'HH:mm')}
+            {format(new Date(room.updatedAt), 'HH:mm')}
           </Text>
         </View>
       </Pressable>

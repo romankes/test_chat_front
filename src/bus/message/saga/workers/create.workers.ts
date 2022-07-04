@@ -21,10 +21,14 @@ export function* createItem(action: CreateItemAsync) {
 
     yield put(messageActions.createWaitingItem(message));
 
+    console.log('here');
+
     const response: AxiosResponse<Message.ResCreateItem> = yield call(
       apiMessage.createItem,
       action.payload,
     );
+
+    console.log(response.data);
 
     if (response.data) {
       yield put(
