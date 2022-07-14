@@ -22,6 +22,7 @@
 		7EF68E3733C33B6898317E18 /* libPods-test_chat-test_chatTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-test_chat-test_chatTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A22F9B982F414CEE93B5ECFE /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8DB14224686425E91C25304 /* OpenSans-ExtraBoldItalic.ttf */; };
+		B5ABE6EA287734D20048DAFC /* SimulatorsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5ABE6E9287734D20048DAFC /* SimulatorsList.txt */; };
 		DFFE07F3770F4F15988B7576 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D311C1768054230A3C79A4E /* OpenSans-ExtraBold.ttf */; };
 		E70D85D73B0645E7925951FD /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F4A7EF183314669A7272B1E /* OpenSans-Medium.ttf */; };
 		EF31C9B46D7449E49F2DD5EB /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1029D0D97A9F40F1A532A277 /* OpenSans-SemiBoldItalic.ttf */; };
@@ -65,6 +66,9 @@
 		AABE2ACD38204A20B75013C1 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-BoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-test_chat-test_chatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test_chat-test_chatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B16C7C4B188947B5A4CB3847 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../src/assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		B5ABE6E8287734380048DAFC /* multipleSimulatorsStartup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = multipleSimulatorsStartup.sh; sourceTree = "<group>"; };
+		B5ABE6E9287734D20048DAFC /* SimulatorsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimulatorsList.txt; sourceTree = "<group>"; };
+		B5BECB20287B5D8400546332 /* icon-source.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-source.png"; path = "/Users/romankes/projects/test_chat_front/ios/icon-source.png"; sourceTree = "<absolute>"; };
 		C0A881CF5CF3F2B244570E2A /* Pods-test_chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_chat.debug.xcconfig"; path = "Target Support Files/Pods-test_chat/Pods-test_chat.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-test_chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_chat.release.xcconfig"; path = "Target Support Files/Pods-test_chat/Pods-test_chat.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -159,6 +163,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B5BECB20287B5D8400546332 /* icon-source.png */,
+				B5ABE6E9287734D20048DAFC /* SimulatorsList.txt */,
+				B5ABE6E8287734380048DAFC /* multipleSimulatorsStartup.sh */,
 				13B07FAE1A68108700A75B9A /* test_chat */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* test_chatTests */,
@@ -229,6 +236,7 @@
 				C8AC78B0264D0F9F6F6D630E /* [CP] Embed Pods Frameworks */,
 				ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */,
 				A62638AC15D72290B897AD81 /* [CP-User] [RNFB] Core Configuration */,
+				B5ABE6EB287734F80048DAFC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -294,6 +302,7 @@
 				DFFE07F3770F4F15988B7576 /* OpenSans-ExtraBold.ttf in Resources */,
 				A22F9B982F414CEE93B5ECFE /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				64671F10E6B540B8A1142855 /* OpenSans-Italic.ttf in Resources */,
+				B5ABE6EA287734D20048DAFC /* SimulatorsList.txt in Resources */,
 				088B8A0FB80D48E7BD7530EE /* OpenSans-Light.ttf in Resources */,
 				4B5C79A2F37D441DBABF08E9 /* OpenSans-LightItalic.ttf in Resources */,
 				E70D85D73B0645E7925951FD /* OpenSans-Medium.ttf in Resources */,
@@ -428,6 +437,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-test_chat/Pods-test_chat-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B5ABE6EB287734F80048DAFC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.custom_sim=`xcrun simctl list | grep 'Custom Simulators' | awk -F'[()]' '{print $2}'`\nif [ ! -z \"${custom_sim}\" ] && [ \"${TARGET_DEVICE_IDENTIFIER}\" = \"${custom_sim}\" ]; then\n/bin/sh multipleSimulatorsStartup.sh\nfi\n";
 		};
 		C8AC78B0264D0F9F6F6D630E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

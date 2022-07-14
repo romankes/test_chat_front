@@ -28,8 +28,10 @@ export namespace User {
   };
 
   export type ReqUpdateDetail = {
-    name: string;
-    avatar: Asset | null;
+    name?: string;
+    avatar?: Asset | null;
+    deviceToken?: string;
+    currentRoom?: string;
   };
 
   export type ResUpdateDetail = {};

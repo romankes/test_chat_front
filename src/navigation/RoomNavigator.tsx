@@ -22,10 +22,8 @@ export const RoomNavigator = () => {
     dispatch(
       socketActions.createWaitingItemListener({
         command: 'subscribe',
-        event: 'create_message',
+        event: 'CREATE_MESSAGE',
         handler: (data) => {
-          console.log(data);
-
           dispatch(messageActions.processItemAsync(data));
         },
       }),

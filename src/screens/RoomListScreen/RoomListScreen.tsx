@@ -18,7 +18,7 @@ import {useStyles} from './useStyles';
 type TProps = StackScreenProps<RoomStackParams, Routes.ROOMS_LIST>;
 
 export const RoomListScreen: FC<TProps> = ({navigation}) => {
-  const {rooms, isLoading, onRemove} = useData();
+  const {rooms, isLoading, onRemove, setValue, value, onLoadMore} = useData();
   const {styles} = useStyles();
 
   return (
@@ -26,7 +26,7 @@ export const RoomListScreen: FC<TProps> = ({navigation}) => {
       <View style={styles.header}>
         <FilledField
           leftIcon={
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setValue('')}>
               <CloseIcon color="light" size={16} />
             </TouchableOpacity>
           }
@@ -36,6 +36,8 @@ export const RoomListScreen: FC<TProps> = ({navigation}) => {
             </TouchableOpacity>
           }
           error={undefined}
+          value={value}
+          onChangeText={setValue}
           errorEmpty
           color="action"
         />
@@ -43,6 +45,7 @@ export const RoomListScreen: FC<TProps> = ({navigation}) => {
       <FlatList
         style={styles.container}
         data={rooms}
+        onEndReached={onLoadMore}
         keyExtractor={({_id}) => `room-${_id}`}
         ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
         renderItem={({item}) => (

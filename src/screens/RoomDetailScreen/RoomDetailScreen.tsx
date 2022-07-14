@@ -10,6 +10,7 @@ import {
   SendIcon,
   Text,
   ImagePicker,
+  ImageCard,
 } from '@/components';
 import {Routes} from '@/navigation';
 import {RoomStackParams} from '@/navigation/RoomNavigator';
@@ -25,6 +26,9 @@ import {
 } from 'react-native';
 import {useData} from './useData';
 import {useStyles} from './useStyles';
+
+import ENV from '@/configs';
+import {MessageLayout} from '@/layouts';
 
 type TProps = StackScreenProps<RoomStackParams, Routes.ROOM_DETAIL>;
 
@@ -56,7 +60,7 @@ export const RoomDetailScreen: FC<TProps> = ({navigation, route}) => {
         {detail && (
           <View style={styles.headerMain}>
             <Avatar
-              url={null}
+              url={detail.avatar && `${ENV.BASE_URL}/${detail.avatar}`}
               size="small"
               variant="round"
               letter={detail?.title[0]}
@@ -79,16 +83,16 @@ export const RoomDetailScreen: FC<TProps> = ({navigation, route}) => {
           </Pressable>
         </View>
       </View>
-      <FlatList
+      <MessageLayout
         ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
-        ref={flatListRef}
         contentContainerStyle={styles.container}
         data={messages}
         onContentSizeChange={() => {
           flatListRef.current?.scrollToEnd();
         }}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <MessageCard
+            prevMessage={messages[index - 1]}
             message={item}
             isMy={!item?.user || user?._id === item.user._id}
           />
@@ -96,6 +100,23 @@ export const RoomDetailScreen: FC<TProps> = ({navigation, route}) => {
         keyExtractor={({_id}) => `message-${_id}`}
       />
       <View style={styles.footer}>
+        <Controller
+          control={control}
+          name="image"
+          render={({field: {onChange, value}}) => (
+            <View>
+              {!!value && (
+                <ImageCard onRemove={() => onChange(null)} image={value} />
+              )}
+              <ImagePicker
+                actionSheetRef={actionsheetRef}
+                onUploadItems={(items) => {
+                  onChange(items[0]);
+                }}
+              />
+            </View>
+          )}
+        />
         <Controller
           control={control}
           name="text"
@@ -123,7 +144,6 @@ export const RoomDetailScreen: FC<TProps> = ({navigation, route}) => {
           )}
         />
       </View>
-      <ImagePicker actionSheetRef={actionsheetRef} onUploadItems={() => {}} />
     </SafeAreaView>
   );
 };

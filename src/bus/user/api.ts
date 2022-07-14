@@ -14,17 +14,19 @@ export const apiUser = new (class Api {
   updateDetail(data: User.ReqUpdateDetail): AxiosPromise<User.ReqUpdateDetail> {
     const fd = new FormData();
 
-    console.log(data);
+    for (let key in data) {
+      if (key === 'avatar' && data.avatar) {
+        fd.append('avatar', {
+          uri: data.avatar.uri,
+          name: data.avatar.fileName,
+          type: data.avatar.type,
+        });
 
-    if (data.avatar) {
-      fd.append('avatar', {
-        uri: data.avatar.uri,
-        name: data.avatar.fileName,
-        type: data.avatar.type,
-      });
+        continue;
+      }
+
+      fd.append(key, data[key as keyof User.ReqUpdateDetail]);
     }
-
-    fd.append('name', data.name);
 
     return axios({
       url: '/users',

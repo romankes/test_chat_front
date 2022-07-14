@@ -19,10 +19,37 @@ export const apiRoom = new (class Api {
   }
 
   createItem(room: Room.ReqCreateItem): AxiosPromise<Room.ResCreateItem> {
+    const fd = new FormData();
+
+    for (let key in room) {
+      if ((key as keyof Room.ReqCreateItem) === 'users') {
+        room.users.forEach((user) => {
+          fd.append(`room[${key}]`, user);
+        });
+
+        continue;
+      }
+
+      if ((key as keyof Room.ReqCreateItem) === 'avatar' && room.avatar) {
+        fd.append('room[avatar]', {
+          uri: room.avatar.uri,
+          name: room.avatar.fileName,
+          type: room.avatar.type,
+        });
+
+        continue;
+      }
+
+      fd.append(`room[${key}]`, room[key as keyof Room.ReqCreateItem]);
+    }
+
     return axios({
       url: '/rooms',
       method: 'post',
-      data: {room},
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      data: fd,
     });
   }
 

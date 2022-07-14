@@ -1,11 +1,11 @@
 import {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 import {useTheme} from '@/hooks';
-import {ButtonKeysIcon} from '@/themes/palletes/types';
+import {ButtonKeys} from '@/themes/palletes/types';
 import {Fonts} from '@/themes';
 
 export const useStyles = (
-  color: ButtonKeysIcon,
+  color: ButtonKeys,
   size: number,
   weight: keyof typeof Fonts,
 ) => {
@@ -16,12 +16,17 @@ export const useStyles = (
       StyleSheet.create({
         wrapper: {
           backgroundColor: pallete.button.background[color],
+
+          borderColor: pallete.button.border[color],
+          borderWidth: 1,
+
           height: 40,
+
+          paddingHorizontal: 12,
+
+          flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          paddingHorizontal: 12,
-          flexWrap: 'nowrap',
-          flexDirection: 'row',
         },
         text: {
           color: pallete.button.text[color],

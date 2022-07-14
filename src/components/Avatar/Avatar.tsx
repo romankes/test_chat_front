@@ -1,3 +1,4 @@
+import {Background} from '@/themes/palletes/types';
 import React, {FC, useMemo} from 'react';
 import {Image, View} from 'react-native';
 import {Text} from '../Core';
@@ -8,6 +9,7 @@ type TProps = {
   url: string | null;
   variant?: 'sqaure' | 'round';
   size?: 'extraSmall' | 'small' | 'normal';
+  color?: keyof Background;
   margin?: {
     right?: number;
     bottom?: number;
@@ -22,11 +24,12 @@ export const Avatar: FC<TProps> = ({
   url,
   size = 'normal',
   variant = 'sqaure',
+  color = 'action',
   margin,
   letter,
   center = false,
 }) => {
-  const {styles} = useStyles();
+  const {styles} = useStyles({color});
 
   const margins = useMemo(
     () => ({

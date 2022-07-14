@@ -17,8 +17,12 @@ export function* fetchItems(action: FetchItemsAsync): SagaIterator {
       action.payload,
     );
 
+    console.log(response.data);
+
     if (response.data) {
-      yield put(roomActions.saveItems(response.data));
+      yield put(
+        roomActions.saveItems({...response.data, page: action.payload.page}),
+      );
     }
   } catch (e) {
     console.log(`error fetch item worker ${e}`);
@@ -37,8 +41,6 @@ export function* fetchDetail(action: FetchDetailAsync): SagaIterator {
       apiRoom.fetchDetail,
       action.payload,
     );
-
-    console.log(response.data);
 
     if (response.data) {
       yield all([

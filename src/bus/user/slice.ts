@@ -25,8 +25,6 @@ const slice = createSlice({
         state.items = [...state.items, ...action.payload.users];
       }
 
-      console.log(action.payload);
-
       const totalPage = Math.round(
         action.payload.totalCount / action.payload.per,
       );
@@ -37,6 +35,7 @@ const slice = createSlice({
     saveDetail: (state: UserState, action: PayloadAction<User.Detail>) => {
       state.detail = action.payload;
     },
+
     clearDetail: (state: UserState) => {
       state.detail = null;
     },
@@ -51,10 +50,7 @@ export const userActions = {
     type: types.UPDATE_DETAIL,
     payload,
   }),
-  updateDeviceTokenAsync: (payload: string): UserActionTypes => ({
-    type: types.UPDATE_DEVICE_TOKEN,
-    payload,
-  }),
+
   fetchDetailAsync: (): UserActionTypes => ({
     type: types.FETCH_DETAIL,
   }),

@@ -25,12 +25,15 @@ export type Text = {
 type Button = {
   background: {
     default: ColorValue;
+    action: ColorValue;
   };
   text: {
     default: ColorValue;
+    action: ColorValue;
   };
   border: {
     default: ColorValue;
+    action: ColorValue;
   };
 };
 

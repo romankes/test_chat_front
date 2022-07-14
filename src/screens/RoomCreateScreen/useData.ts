@@ -1,8 +1,11 @@
 import {Room, roomActions, roomSelectors} from '@/bus/room';
-import {useEffect, useRef} from 'react';
+import {userActions} from '@/bus/user';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {useCallback, useEffect, useRef} from 'react';
 import {useForm} from 'react-hook-form';
 import ActionSheet from 'react-native-actions-sheet';
 import {useDispatch, useSelector} from 'react-redux';
+import {schema} from './validate';
 
 export const useData = () => {
   const dispatch = useDispatch();
@@ -20,7 +23,9 @@ export const useData = () => {
     defaultValues: {
       title: '',
       users: [],
+      avatar: null,
     },
+    resolver: yupResolver(schema),
   });
 
   useEffect(() => {
@@ -33,5 +38,16 @@ export const useData = () => {
     dispatch(roomActions.createItemAsync(data));
   };
 
-  return {users, handleSubmit: handleSubmit(onSubmit), control, errors, ref};
+  const onRemoveUser = useCallback((id: string) => {
+    dispatch(roomActions.removeUser(id));
+  }, []);
+
+  return {
+    users,
+    handleSubmit: handleSubmit(onSubmit),
+    control,
+    errors,
+    ref,
+    onRemoveUser,
+  };
 };

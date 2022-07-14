@@ -1,8 +1,8 @@
-import {messageSelectors, messageActions} from '@/bus/message';
+import {messageSelectors, messageActions, Message} from '@/bus/message';
 import {roomActions, roomSelectors} from '@/bus/room';
 import {socketActions} from '@/bus/socket';
 import {uiSelectors} from '@/bus/ui';
-import {userSelectors} from '@/bus/user';
+import {userActions, userSelectors} from '@/bus/user';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useCallback, useEffect, useMemo, useRef} from 'react';
 import {useForm} from 'react-hook-form';
@@ -37,9 +37,10 @@ export const useData = ({id}: TArgs) => {
 
   //TODO: add ts
 
-  const {control, handleSubmit, reset} = useForm({
+  const {control, handleSubmit, reset} = useForm<Message.Form>({
     defaultValues: {
       text: '',
+      image: null,
     },
     resolver: yupResolver(schema),
   });
@@ -53,7 +54,9 @@ export const useData = ({id}: TArgs) => {
         }),
       );
 
-      reset({text: ''});
+      console.log(data);
+
+      reset({text: '', image: null});
     }
   };
 
@@ -63,13 +66,7 @@ export const useData = ({id}: TArgs) => {
 
   useEffect(() => {
     return () => {
-      console.log('unmount');
-      dispatch(
-        socketActions.createEventEmitItem({
-          event: 'remove_current_room',
-          data: {},
-        }),
-      );
+      dispatch(userActions.updateDetailAsync({currentRoom: ''}));
     };
   }, []);
 

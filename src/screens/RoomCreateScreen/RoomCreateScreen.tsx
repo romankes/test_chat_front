@@ -1,5 +1,12 @@
 import {User} from '@/bus/user';
-import {Avatar, Button, FilledField, ImagePicker, UserCard} from '@/components';
+import {
+  Avatar,
+  Button,
+  FilledField,
+  ImagePicker,
+  InvitedUserCard,
+  UserCard,
+} from '@/components';
 import {Routes} from '@/navigation';
 import {RoomCreateStackParamList} from '@/navigation/RoomCreateNavigator';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -16,7 +23,7 @@ type TProps = StackScreenProps<RoomCreateStackParamList, Routes.ROOM_CREATE>;
 export const RoomCreateScreen: FC<TProps> = ({navigation}) => {
   const {styles} = useStyles();
 
-  const {users, control, errors, handleSubmit, ref} = useData();
+  const {users, control, errors, handleSubmit, ref, onRemoveUser} = useData();
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -25,6 +32,7 @@ export const RoomCreateScreen: FC<TProps> = ({navigation}) => {
         <FlatList
           ListEmptyComponent={
             <Button
+              color="action"
               margin={{top: 16, right: 16, left: 16}}
               onPress={() => navigation.navigate(Routes.USER_LIST)}>
               Invite Users
@@ -32,11 +40,28 @@ export const RoomCreateScreen: FC<TProps> = ({navigation}) => {
           }
           ListHeaderComponent={
             <View style={styles.container}>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => ref.current?.show()}>
-                <Avatar url={null} center />
-              </TouchableOpacity>
+              <Controller
+                control={control}
+                name="avatar"
+                render={({field: {onChange, value}}) => (
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => ref.current?.show()}>
+                    <Avatar
+                      variant="round"
+                      url={(value && value.uri) || ''}
+                      center
+                    />
+
+                    <ImagePicker
+                      actionSheetRef={ref}
+                      onUploadItems={(items) => {
+                        onChange(items[0]);
+                      }}
+                    />
+                  </TouchableOpacity>
+                )}
+              />
               <Controller
                 name="title"
                 render={({field: {name, onBlur, onChange, value}}) => (
@@ -55,7 +80,10 @@ export const RoomCreateScreen: FC<TProps> = ({navigation}) => {
           }
           data={users}
           renderItem={({item}) => (
-            <UserCard user={item} isSelected onPress={() => {}} />
+            <InvitedUserCard
+              user={item}
+              onRemove={() => onRemoveUser(item._id)}
+            />
           )}
           keyExtractor={(user) => `user-${user._id}`}
         />
@@ -65,13 +93,6 @@ export const RoomCreateScreen: FC<TProps> = ({navigation}) => {
       <View style={styles.container}>
         <Button onPress={handleSubmit}>Create Room</Button>
       </View>
-
-      <ImagePicker
-        actionSheetRef={ref}
-        onUploadItems={(items) => {
-          console.log(items);
-        }}
-      />
     </SafeAreaView>
   );
 };

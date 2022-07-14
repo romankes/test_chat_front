@@ -20,7 +20,7 @@ export const slice = createSlice({
       state: MessageState,
       action: PayloadAction<Message.WaitingItem>,
     ) => {
-      state.waitingItems.push(action.payload);
+      state.waitingItems = [action.payload, ...state.waitingItems];
     },
     confirmItem: (
       state: MessageState,
@@ -30,7 +30,7 @@ export const slice = createSlice({
         (item) => item._id !== action.payload._id,
       );
 
-      state.items.push(action.payload.message);
+      state.items = [action.payload.message, ...state.items];
     },
     clearItems: (state: MessageState) => {
       state.items = [];

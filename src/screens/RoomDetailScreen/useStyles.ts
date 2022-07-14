@@ -2,9 +2,12 @@ import {useTheme} from '@/hooks';
 import {useMemo} from 'react';
 import {StatusBar} from 'react-native';
 import {StyleSheet} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export const useStyles = () => {
   const {pallete} = useTheme();
+
+  const insets = useSafeAreaInsets();
 
   const styles = useMemo(
     () =>
@@ -13,9 +16,10 @@ export const useStyles = () => {
           flex: 1,
         },
         header: {
-          paddingTop: StatusBar.currentHeight,
+          paddingTop: (StatusBar.currentHeight || 0) + insets.top,
+          marginTop: -insets.top,
 
-          height: (StatusBar.currentHeight || 0) + 100,
+          height: (StatusBar.currentHeight || 0) + insets.top + 100,
 
           backgroundColor: pallete.background.gray,
 
@@ -54,9 +58,12 @@ export const useStyles = () => {
           marginRight: 8,
         },
         footer: {
-          height: 48,
+          minHeight: 48 + insets.bottom,
 
+          marginBottom: -insets.bottom,
           paddingHorizontal: 12,
+          paddingBottom: insets.bottom - 6,
+          paddingTop: 16,
 
           backgroundColor: pallete.background.action,
 

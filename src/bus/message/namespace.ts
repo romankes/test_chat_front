@@ -1,3 +1,4 @@
+import {Asset} from 'react-native-image-picker';
 import {User} from '../user';
 
 export namespace Message {
@@ -9,25 +10,24 @@ export namespace Message {
     user: User.Detail;
     room: string;
     status: Status;
+    image: string | null;
   };
 
-  export type WaitingItem = {
-    _id: number;
-    updatedAt?: string;
-    createdAt: string;
-    text: string;
-    user: null;
+  export type WaitingItem = Item & {
     status: 'waiting';
   };
 
   export type ConfirmItemPayload = {
-    _id: number;
+    _id: string;
     message: Item;
   };
 
-  export type ReqCreateItem = {
+  export type Form = {
     text: string;
+    image: Asset | null;
+  };
 
+  export type ReqCreateItem = Form & {
     roomId: string;
   };
   export type ResCreateItem = {

@@ -13,6 +13,9 @@ export type RoomState = {
   detail: Room.Detail | null;
 
   users: Room.User[];
+
+  page: number;
+  totalCount: number;
 };
 
 export type FetchItemsAsync = {

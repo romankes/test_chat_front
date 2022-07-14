@@ -25,12 +25,15 @@ const pallete: Pallete = {
   button: {
     background: {
       default: '#5600E8',
+      action: 'transparent',
     },
     text: {
       default: '#fff',
+      action: '#5600E8',
     },
     border: {
       default: '#5600E8',
+      action: '#5600E8',
     },
   },
   input: {

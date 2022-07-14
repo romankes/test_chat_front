@@ -3,10 +3,12 @@ import {Text, Avatar, TrashIcon} from '@/components';
 import React, {FC, useCallback, useMemo} from 'react';
 import {View, Pressable} from 'react-native';
 
-import {format} from 'date-fns';
+import {format, formatDistanceToNow} from 'date-fns';
 
 import {useStyles} from './useStyles';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+import ENV from '@/configs';
 
 type TProps = {
   room: Room.Item;
@@ -48,7 +50,7 @@ export const RoomCard: FC<TProps> = ({onPress, room, onRemove}) => {
       overshootRight={false}>
       <Pressable style={styles.wrapper} onPress={onPress}>
         <Avatar
-          url={null}
+          url={room.avatar && `${ENV.BASE_URL}/${room.avatar}`}
           letter={renderName[0]}
           size="small"
           variant="round"
@@ -74,7 +76,10 @@ export const RoomCard: FC<TProps> = ({onPress, room, onRemove}) => {
             </View>
           )}
           <Text family="light" color="action">
-            {format(new Date(room.updatedAt), 'HH:mm')}
+            {formatDistanceToNow(
+              new Date(room.message?.updatedAt || room.updatedAt),
+              {addSuffix: true},
+            )}
           </Text>
         </View>
       </Pressable>

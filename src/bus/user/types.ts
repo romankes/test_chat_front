@@ -3,9 +3,8 @@ import {User} from './namespace';
 export enum types {
   FETCH_ITEMS = 'USER/FETCH_ITEMS',
   FETCH_DETAIL = 'USER/FETCH_DETAIL',
-  UPDATE_DETAIL = 'USER/UPDATE_DETAIL',
 
-  UPDATE_DEVICE_TOKEN = 'USER/UPDATE_DEVICE_TOKEN',
+  UPDATE_DETAIL = 'USER/UPDATE_DETAIL',
 
   END_FETCH_DETAIL = 'USER/END_FETCH_DETAIL',
 }
@@ -31,12 +30,8 @@ export type UpdateDetailAsync = {
   type: types.UPDATE_DETAIL;
   payload: User.ReqUpdateDetail;
 };
-export type UpdateDeviceTokenAsync = {
-  type: typeof types.UPDATE_DEVICE_TOKEN;
-  payload: string;
-};
+
 export type UserActionTypes =
   | FetchDetailAsync
   | UpdateDetailAsync
-  | FetchItemsAsync
-  | UpdateDeviceTokenAsync;
+  | FetchItemsAsync;

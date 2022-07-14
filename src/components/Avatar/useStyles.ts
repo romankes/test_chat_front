@@ -1,15 +1,20 @@
 import {useTheme} from '@/hooks';
+import {Background} from '@/themes/palletes/types';
 import {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 
-export const useStyles = () => {
+type TArgs = {
+  color: keyof Background;
+};
+
+export const useStyles = ({color}: TArgs) => {
   const {pallete} = useTheme();
 
   const styles = useMemo(
     () =>
       StyleSheet.create({
         wrapper: {
-          backgroundColor: pallete.background.action,
+          backgroundColor: pallete.background[color],
 
           justifyContent: 'center',
         },
@@ -21,7 +26,7 @@ export const useStyles = () => {
           borderRadius: 164,
         },
       }),
-    [pallete],
+    [pallete, color],
   );
 
   return {styles};

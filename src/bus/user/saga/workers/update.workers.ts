@@ -4,7 +4,7 @@ import {SagaIterator} from 'redux-saga';
 import {all, call, put} from 'redux-saga/effects';
 import {apiUser} from '../../api';
 import {User} from '../../namespace';
-import {UpdateDetailAsync, UpdateDeviceTokenAsync} from '../../types';
+import {UpdateDetailAsync} from '../../types';
 
 export function* updateDetail(action: UpdateDetailAsync): SagaIterator {
   try {
@@ -17,18 +17,5 @@ export function* updateDetail(action: UpdateDetailAsync): SagaIterator {
   } catch (e) {
     console.log(`update user detail worker ${e}`);
   } finally {
-  }
-}
-
-export function* updateDeviceToken(
-  action: UpdateDeviceTokenAsync,
-): SagaIterator {
-  try {
-    const response: AxiosResponse = yield call(
-      apiUser.updateDeviceToken,
-      action.payload,
-    );
-  } catch (e) {
-    console.log(`error update device token ${e}`);
   }
 }

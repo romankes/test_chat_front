@@ -13,17 +13,14 @@ export const useStyles = () => {
 
           backgroundColor: pallete.background.gray,
 
-          marginBottom: 8,
+          marginTop: 12,
+          marginHorizontal: 12,
           paddingHorizontal: 12,
 
           alignItems: 'center',
           flexDirection: 'row',
-          shadowColor: pallete.background.action,
-          shadowOffset: {
-            height: -10,
-            width: 0,
-          },
-          elevation: 5,
+
+          borderRadius: 16,
         },
         active: {},
         content: {

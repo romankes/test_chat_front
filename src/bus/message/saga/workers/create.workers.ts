@@ -1,3 +1,4 @@
+import {roomActions} from '@/bus/room';
 import {AxiosResponse} from 'axios';
 import {all, put, call} from 'redux-saga/effects';
 import {apiMessage} from '../../api';
@@ -21,22 +22,21 @@ export function* createItem(action: CreateItemAsync) {
 
     yield put(messageActions.createWaitingItem(message));
 
-    console.log('here');
-
     const response: AxiosResponse<Message.ResCreateItem> = yield call(
       apiMessage.createItem,
       action.payload,
     );
 
-    console.log(response.data);
-
     if (response.data) {
-      yield put(
-        messageActions.confirmItem({
-          message: {...response.data.message, status: 'sended'},
-          _id,
-        }),
-      );
+      yield all([
+        put(roomActions.updateLastMessage(response.data.message)),
+        put(
+          messageActions.confirmItem({
+            message: {...response.data.message, status: 'sended'},
+            _id,
+          }),
+        ),
+      ]);
     }
   } catch (e) {
     console.log(`error create item ${e}`);
