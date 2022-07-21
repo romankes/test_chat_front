@@ -12,9 +12,11 @@ export const BackArrowIcon: FC<TProps> = ({color, size}) => {
   const {pallete} = useTheme();
 
   return (
-    <Svg width={size} height={size} viewBox="0 0 11 16" fill="none">
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <Path
-        d="M10.5466 14.12L4.43996 8L10.5466 1.88L8.66663 0L0.666626 8L8.66663 16L10.5466 14.12Z"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M24 10.5H5.7L14.1 2.1L12 0L0 12L12 24L14.1 21.9L5.7 13.5H24V10.5Z"
         fill={pallete.icon[color]}
       />
     </Svg>

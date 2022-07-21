@@ -18,7 +18,7 @@ export const useData = () => {
   } = useForm<Auth.ReqSignIn>({
     mode: 'onChange',
     defaultValues: {
-      email: 'admin@admin.com',
+      email: 'admin@example.com',
       password: 'polopolo',
     },
     resolver: yupResolver(schema),

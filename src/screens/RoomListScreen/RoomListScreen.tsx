@@ -23,31 +23,14 @@ export const RoomListScreen: FC<TProps> = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={styles.header}>
-        <FilledField
-          leftIcon={
-            <TouchableOpacity onPress={() => setValue('')}>
-              <CloseIcon color="light" size={16} />
-            </TouchableOpacity>
-          }
-          rightIcon={
-            <TouchableOpacity>
-              <SearchIcon color="light" size={16} />
-            </TouchableOpacity>
-          }
-          error={undefined}
-          value={value}
-          onChangeText={setValue}
-          errorEmpty
-          color="action"
-        />
-      </View>
+      <Header onChangeText={setValue} value={value} />
+
       <FlatList
         style={styles.container}
         data={rooms}
         onEndReached={onLoadMore}
         keyExtractor={({_id}) => `room-${_id}`}
-        ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
+        // ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
         renderItem={({item}) => (
           <RoomCard
             onRemove={() => onRemove(item._id)}

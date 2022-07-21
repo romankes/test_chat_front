@@ -10,24 +10,36 @@ export const useStyles = () => {
       StyleSheet.create({
         wrapper: {
           flex: 1,
-          backgroundColor: pallete.background.default,
         },
 
         container: {
           paddingHorizontal: 16,
+        },
 
-          height: '90%',
+        header: {
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+
+          marginBottom: 8,
         },
 
         content: {
-          flex: 1,
-
-          justifyContent: 'center',
+          paddingTop: 16,
         },
-        avatar: {
-          alignSelf: 'center',
 
-          marginBottom: 48,
+        main: {
+          flexDirection: 'row',
+        },
+        mainContent: {
+          marginLeft: 16,
+          paddingVertical: 12,
+
+          flex: 1,
+        },
+
+        list: {
+          marginTop: 52,
         },
       }),
     [pallete],

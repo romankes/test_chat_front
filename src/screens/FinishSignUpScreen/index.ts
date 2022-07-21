@@ -1,1 +1,0 @@
-export {FinishSignUpScreen} from './FinishSignUpScreen';

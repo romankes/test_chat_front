@@ -7,17 +7,12 @@ import {Routes} from './Routes';
 
 import {AuthNavigator} from './AuthNavigator';
 // import {TabNavigator} from './TabNavigator';
-import {Loader} from '../components/Core/Loader';
 import {authSelectors} from '@/bus/auth';
 import {appActions, appSelectors} from '@/bus/app';
-import {View} from 'react-native';
-import {Empty, FinishSignUpScreen} from '@/screens';
 
-import {io} from 'socket.io-client';
-import ENV from '@/configs';
 import {navigationRef} from './RootNavigation';
 import {TabNavigator} from './TabNavigator';
-import {usePush, useSocket} from '@/hooks';
+import {usePush, useSocket, useTheme} from '@/hooks';
 
 export type AppStackParamList = {
   [Routes.AUTH_NAVIGATOR]: undefined;
@@ -33,6 +28,8 @@ export const AppNavigator: FC = () => {
 
   const loggined = useSelector(authSelectors.getLoggined);
   const initalized = useSelector(appSelectors.getInitialized);
+
+  const {pallete} = useTheme();
 
   useEffect(() => {
     if (!initalized) {
@@ -53,28 +50,24 @@ export const AppNavigator: FC = () => {
         ...DefaultTheme,
         colors: {
           ...DefaultTheme.colors,
-          background: 'transparent',
+          background: pallete.background.default as string,
         },
       }}>
       <AppStack.Navigator
-        initialRouteName={
-          loggined ? Routes.TABS_NAVIGATOR : Routes.AUTH_NAVIGATOR
-        }
         screenOptions={{
           headerShown: false,
         }}>
-        <AppStack.Screen
-          name={Routes.AUTH_NAVIGATOR}
-          component={AuthNavigator}
-        />
-        <AppStack.Screen
-          name={Routes.TABS_NAVIGATOR}
-          component={TabNavigator}
-        />
-        <AppStack.Screen
-          name={Routes.FINISH_SIGN_UP}
-          component={FinishSignUpScreen}
-        />
+        {!loggined ? (
+          <AppStack.Screen
+            name={Routes.AUTH_NAVIGATOR}
+            component={AuthNavigator}
+          />
+        ) : (
+          <AppStack.Screen
+            name={Routes.TABS_NAVIGATOR}
+            component={TabNavigator}
+          />
+        )}
       </AppStack.Navigator>
     </NavigationContainer>
   );

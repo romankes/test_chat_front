@@ -3,3 +3,4 @@ export * from './useTabBarState';
 export * from './useSocket';
 export * from './useDebounce';
 export * from './usePush';
+export * from './useLoader';

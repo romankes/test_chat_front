@@ -3,9 +3,11 @@ import {StackScreenProps} from '@react-navigation/stack';
 
 import {
   Avatar,
+  Button,
   CheckmarkIcon,
   CloseIcon,
   FilledField,
+  Header,
   Loader,
   SearchIcon,
   Text,
@@ -43,48 +45,13 @@ export const UserListScreen: FC<TProps> = ({navigation}) => {
     onSaveUsers,
   } = useData();
 
-  const renderHeader = useMemo(
-    () => (
-      <View style={styles.header}>
-        <FilledField
-          leftIcon={
-            <Pressable onPress={() => navigation.goBack()}>
-              <CloseIcon color="light" size={16} />
-            </Pressable>
-          }
-          rightIcon={
-            <Pressable
-              onPress={() => {
-                if (ids.length) {
-                  onSaveUsers();
-                  navigation.goBack();
-                }
-              }}>
-              {!ids.length ? (
-                <SearchIcon color="light" size={16} />
-              ) : (
-                <CheckmarkIcon color="light" size={16} />
-              )}
-            </Pressable>
-          }
-          error={undefined}
-          errorEmpty
-          value={value}
-          onChangeText={(value) => setValue(value)}
-          color="action"
-        />
-      </View>
-    ),
-    [value, ids],
-  );
-
   return (
     <SafeAreaView style={styles.wrapper}>
+      <Header onChangeText={setValue} />
       <FlatList
         data={users}
         onEndReached={onLoad}
-        ListHeaderComponent={renderHeader}
-        ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
+        // ListEmptyComponent={isLoading ? <Loader height={200} /> : null}
         keyExtractor={(user) => `user-${user._id}`}
         renderItem={({item}) => (
           <UserCard
@@ -94,6 +61,18 @@ export const UserListScreen: FC<TProps> = ({navigation}) => {
           />
         )}
       />
+      <View style={styles.container}>
+        <Button
+          onPress={() => {
+            if (ids.length) {
+              onSaveUsers();
+              navigation.goBack();
+            }
+          }}
+          color={ids.length ? 'default' : 'disable'}>
+          Invite
+        </Button>
+      </View>
     </SafeAreaView>
   );
 };

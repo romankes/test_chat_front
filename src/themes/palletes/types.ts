@@ -11,7 +11,7 @@ export type Background = {
 export type Icon = {
   default: ColorValue;
   gray: ColorValue;
-  light: ColorValue;
+  dark: ColorValue;
   action: ColorValue;
 };
 export type Text = {
@@ -22,44 +22,49 @@ export type Text = {
   light: ColorValue;
   action: ColorValue;
 };
+
+export type ButtonKeys = {
+  default: ColorValue;
+  outline: ColorValue;
+  danger: ColorValue;
+  success: ColorValue;
+  disable: ColorValue;
+};
+
+export type InputKeys = {
+  default: ColorValue;
+  danger: ColorValue;
+  action: ColorValue;
+};
+
 type Button = {
-  background: {
-    default: ColorValue;
-    action: ColorValue;
-  };
-  text: {
-    default: ColorValue;
-    action: ColorValue;
-  };
-  border: {
-    default: ColorValue;
-    action: ColorValue;
-  };
+  background: ButtonKeys;
+  text: ButtonKeys;
+  border: ButtonKeys;
 };
 
 type Input = {
-  background: {
-    default: ColorValue;
-    danger: ColorValue;
-    action: ColorValue;
-  };
-  text: {
-    default: ColorValue;
-    danger: ColorValue;
-    action: ColorValue;
-  };
-  border: {
-    default: ColorValue;
-    danger: ColorValue;
-    action: ColorValue;
-  };
-};
-type Border = {
-  default: ColorValue;
+  background: InputKeys;
+  text: InputKeys;
+  border: InputKeys;
 };
 
-export type ButtonKeys = keyof Button['background'];
-export type InputKeys = keyof Input['background'];
+type Border = {
+  default: ColorValue;
+  light: ColorValue;
+  action: ColorValue;
+};
+
+type SwitchValues = [ColorValue, ColorValue];
+
+export type SwitchKeys = {
+  default: SwitchValues;
+};
+
+type Switch = {
+  track: SwitchKeys;
+  thumb: SwitchKeys;
+};
 
 export type Pallete = {
   background: Background;
@@ -68,4 +73,5 @@ export type Pallete = {
   button: Button;
   border: Border;
   input: Input;
+  switch: Switch;
 };

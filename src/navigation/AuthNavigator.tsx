@@ -16,7 +16,10 @@ const AuthStack = createStackNavigator<AuthStackParamList>();
 
 export const AuthNavigator = () => {
   return (
-    <AuthStack.Navigator screenOptions={{headerShown: false}}>
+    <AuthStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <AuthStack.Screen
         name={Routes.SIGN_IN}
         component={SignInScreen}

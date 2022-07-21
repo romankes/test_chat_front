@@ -4,11 +4,12 @@ import {useTheme} from '@/hooks';
 import {ButtonKeys} from '@/themes/palletes/types';
 import {Fonts} from '@/themes';
 
-export const useStyles = (
-  color: ButtonKeys,
-  size: number,
-  weight: keyof typeof Fonts,
-) => {
+type TArgs = {
+  color: keyof ButtonKeys;
+  weight: keyof typeof Fonts;
+};
+
+export const useStyles = ({color, weight}: TArgs) => {
   const {pallete, fonts} = useTheme();
 
   const styles = useMemo(
@@ -30,7 +31,6 @@ export const useStyles = (
         },
         text: {
           color: pallete.button.text[color],
-          fontSize: size,
           fontFamily: fonts[weight],
         },
         leftIconWrapper: {

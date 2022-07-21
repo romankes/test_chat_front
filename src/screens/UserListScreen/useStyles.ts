@@ -16,23 +16,6 @@ export const useStyles = () => {
 
           backgroundColor: pallete.background.default,
         },
-        header: {
-          paddingTop: (StatusBar.currentHeight || 0) + insets.top,
-          marginTop: -insets.top,
-
-          height: (StatusBar.currentHeight || 0) + insets.top + 64,
-
-          backgroundColor: pallete.background.gray,
-
-          // marginBottom: 8,
-
-          borderBottomColor: `${pallete.background.action as string}40`,
-          borderBottomWidth: 1,
-
-          justifyContent: 'center',
-
-          paddingHorizontal: 8,
-        },
         container: {
           paddingHorizontal: 16,
         },

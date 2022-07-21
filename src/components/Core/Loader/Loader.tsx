@@ -1,28 +1,39 @@
+import {LogoIcon} from '@/components/Icons';
 import React from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Animated, StyleSheet, View} from 'react-native';
 //app
 
 type TProps = {
-  width?: number | string;
-  height?: number | string;
+  scale: Animated.AnimatedInterpolation;
+  rotate: Animated.AnimatedInterpolation;
+  height?: number;
 };
 
-export const Loader: React.FC<TProps> = ({width, height}) => {
-
+export const Loader: React.FC<TProps> = ({rotate, scale, height = 172}) => {
   return (
-    <View
+    <Animated.View
       style={[
-        styles.wrapper,
-        !!width && {
-          width: width,
-        },
-        !!height && {
-          height: height,
-        },
+        {justifyContent: 'center', alignItems: 'center', height},
+        {transform: [{rotate}, {scale}]},
       ]}>
-      <ActivityIndicator color='black' size='large' />
-    </View>
+      <LogoIcon color="action" size={172} />
+    </Animated.View>
   );
+
+  // return (
+  //   <View
+  //     style={[
+  //       styles.wrapper,
+  //       !!width && {
+  //         width: width,
+  //       },
+  //       !!height && {
+  //         height: height,
+  //       },
+  //     ]}>
+  //     <ActivityIndicator color='black' size='large' />
+  //   </View>
+  // );
 };
 
 const styles = StyleSheet.create({

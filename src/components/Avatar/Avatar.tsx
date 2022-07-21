@@ -6,7 +6,7 @@ import {Text} from '../Core';
 import {useStyles} from './useStyles';
 
 type TProps = {
-  url: string | null;
+  url?: string | null;
   variant?: 'sqaure' | 'round';
   size?: 'extraSmall' | 'small' | 'normal';
   color?: keyof Background;
@@ -24,7 +24,7 @@ export const Avatar: FC<TProps> = ({
   url,
   size = 'normal',
   variant = 'sqaure',
-  color = 'action',
+  color = 'gray',
   margin,
   letter,
   center = false,
@@ -46,11 +46,11 @@ export const Avatar: FC<TProps> = ({
       case 'extraSmall':
         return {height: 24, width: 24};
       case 'small':
-        return {height: 72, width: 72};
+        return {height: 64, width: 64};
       case 'normal':
-        return {height: 164, width: 164};
+        return {height: 128, width: 128};
       default:
-        return {height: 72, width: 72};
+        return {height: 64, width: 64};
     }
   }, [size]);
 
@@ -59,9 +59,9 @@ export const Avatar: FC<TProps> = ({
       case 'sqaure':
         return 8;
       case 'round':
-        return 164;
+        return 128;
       default:
-        return 164;
+        return 128;
     }
   }, [variant]);
 

@@ -9,19 +9,16 @@ export const useStyles = () => {
     () =>
       StyleSheet.create({
         wrapper: {
-          flex: 1,
+          borderBottomWidth: 1,
+          borderBottomColor: pallete.border.action,
 
-          backgroundColor: pallete.background.default,
-        },
+          height: 52,
 
-        container: {
-          height: '100%',
-
+          flexDirection: 'row',
           justifyContent: 'space-between',
+          alignItems: 'center',
 
-          paddingHorizontal: 16,
-
-          paddingBottom: 48,
+          paddingHorizontal: 8,
         },
       }),
     [pallete],

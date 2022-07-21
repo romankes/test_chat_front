@@ -1,3 +1,4 @@
+import {EyeIcon} from '@/components/Icons';
 import {Fonts} from '@/themes';
 import {InputKeys} from '@/themes/palletes/types';
 import React, {FC, ReactNode, useEffect, useMemo, useState} from 'react';
@@ -9,6 +10,7 @@ import {
   TextInputProps,
   Animated,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import {Text} from '../Text';
 import {useAnimation} from './useAnimation';
@@ -17,7 +19,7 @@ import {useStyles} from './useStyles';
 
 type TProps = TextInputProps & {
   error: FieldError | undefined;
-  color?: InputKeys;
+  color?: keyof InputKeys;
   family?: keyof typeof Fonts;
   label?: string;
   margin?: {
@@ -42,6 +44,7 @@ export const FilledField: FC<TProps> = ({
   rightIcon,
   leftIcon,
   errorEmpty = false,
+  secureTextEntry,
   ...props
 }) => {
   const {styles, placeholderColor} = useStyles({
@@ -49,13 +52,32 @@ export const FilledField: FC<TProps> = ({
     family,
   });
 
-  const [isTopLabel, setIsTopLabel] = useState(!!props.value);
+  const [isSecure, setIsSecure] = useState(true);
 
-  const {backgroundColor, borderColor, position} = useAnimation({
+  const renderRightIcon = useMemo(() => {
+    if (rightIcon) return rightIcon;
+
+    if (secureTextEntry) {
+      return (
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => setIsSecure(!isSecure)}>
+          <EyeIcon
+            //TODO: add danger color
+            color={!error?.message ? 'dark' : 'action'}
+            size={22}
+            isClose={isSecure}
+          />
+        </TouchableOpacity>
+      );
+    }
+
+    return null;
+  }, [rightIcon, secureTextEntry, isSecure, error?.message]);
+
+  const {backgroundColor, borderColor} = useAnimation({
     color,
-    errorTrigger: !!error?.message,
-    labelTrigger: isTopLabel,
-    value: props.value || '',
+    trigger: !!error?.message,
   });
 
   const margins = useMemo(
@@ -69,15 +91,13 @@ export const FilledField: FC<TProps> = ({
   );
 
   return (
-    <View style={[styles.wrapper, margins, !!label && {height: 86}]}>
+    <View style={margins}>
       {label && (
-        <Animated.View style={[styles.label, position]}>
-          <Text
-            family={isTopLabel ? 'medium' : 'light'}
-            color={isTopLabel ? 'default' : 'gray'}>
+        <View style={styles.label}>
+          <Text family="medium" color="default">
             {label || ''}
           </Text>
-        </Animated.View>
+        </View>
       )}
       <Animated.View
         style={[styles.fieldWrapper, {backgroundColor, borderColor}]}>
@@ -85,32 +105,16 @@ export const FilledField: FC<TProps> = ({
         <View style={styles.inputWrapper}>
           <TextInput
             {...props}
-            onFocus={(e) => {
-              if (!isTopLabel) {
-                setIsTopLabel(true);
-              }
-
-              if (props.onFocus) {
-                props.onFocus(e);
-              }
-            }}
-            onBlur={(e) => {
-              if (!props.value && isTopLabel) {
-                setIsTopLabel(false);
-              }
-
-              if (props.onBlur) {
-                props.onBlur(e);
-              }
-            }}
-            placeholder=""
             placeholderTextColor={placeholderColor}
             numberOfLines={1}
             scrollEnabled={false}
+            secureTextEntry={secureTextEntry && isSecure}
             style={[styles.textInput, props.style]}
           />
         </View>
-        {rightIcon && <View style={styles.rightIconWrapper}>{rightIcon}</View>}
+        {renderRightIcon && (
+          <View style={styles.rightIconWrapper}>{renderRightIcon}</View>
+        )}
       </Animated.View>
       {!errorEmpty && (
         <Text margin={{top: 8}} color="danger" family="light">

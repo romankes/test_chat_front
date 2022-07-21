@@ -5,3 +5,5 @@ export * from './HeaderIcons';
 export * from './SearchIcon';
 export * from './TabBarIcons';
 export * from './CheckmarkIcon';
+export * from './LogoIcon';
+export * from './EyeIcon';

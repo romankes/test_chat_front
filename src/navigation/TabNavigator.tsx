@@ -8,13 +8,14 @@ import {Empty} from '@/screens';
 import {RoomNavigator} from './RoomNavigator';
 import {UserNavigator} from './UserNavigator';
 import {useTabBarState, useTheme} from '@/hooks';
-import {ChatIcon, ProfileIcon, RoomCreateIcon} from '@/components';
+import {ChatIcon, InvitesIcon, ProfileIcon, RoomCreateIcon} from '@/components';
 import {RoomCreateNavigator} from './RoomCreateNavigator';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export type TabStackParamList = {
   [Routes.USER_NAVIGATOR]: undefined;
   [Routes.ROOM_CREATE_NAVIGATOR]: undefined;
+  [Routes.INVITES_NAVIGATOR]: undefined;
   [Routes.ROOM_NAVIGATOR]: undefined;
 };
 
@@ -33,20 +34,20 @@ export const TabNavigator = () => {
         headerShown: false,
         tabBarStyle: {
           display: isShow ? 'flex' : 'none',
-          backgroundColor: pallete.background.gray,
-          height: 64 + insets.bottom,
-          paddingBottom: 8 + insets.bottom,
+          backgroundColor: pallete.background.dark,
+          height: 60 + insets.bottom,
+          paddingBottom: insets.bottom,
         },
+        tabBarShowLabel: false,
+
+        tabBarActiveTintColor: pallete.text.action as string,
+        tabBarInactiveTintColor: pallete.text.default as string,
       }}>
       <TabStack.Screen
         options={() => ({
           tabBarIcon: ({focused}) => (
             <ChatIcon color={focused ? 'action' : 'default'} size={24} />
           ),
-          tabBarLabel: 'Home',
-
-          tabBarActiveTintColor: pallete.text.action as string,
-          tabBarInactiveTintColor: pallete.text.default as string,
         })}
         name={Routes.ROOM_NAVIGATOR}
         component={RoomNavigator}
@@ -54,14 +55,20 @@ export const TabNavigator = () => {
       <TabStack.Screen
         options={() => ({
           tabBarIcon: ({focused}) => (
+            <InvitesIcon color={focused ? 'action' : 'default'} size={24} />
+          ),
+        })}
+        name={Routes.INVITES_NAVIGATOR}
+        component={Empty}
+      />
+      <TabStack.Screen
+        options={() => ({
+          tabBarIcon: ({focused}) => (
             <RoomCreateIcon color={focused ? 'action' : 'default'} size={24} />
           ),
-          tabBarLabel: 'Create Chat',
           tabBarStyle: {
             display: 'none',
           },
-          tabBarActiveTintColor: pallete.text.action as string,
-          tabBarInactiveTintColor: pallete.text.default as string,
         })}
         name={Routes.ROOM_CREATE_NAVIGATOR}
         component={RoomCreateNavigator}
@@ -74,9 +81,6 @@ export const TabNavigator = () => {
           tabBarStyle: {
             display: 'none',
           },
-          tabBarLabel: 'Profile',
-          tabBarActiveTintColor: pallete.text.action as string,
-          tabBarInactiveTintColor: pallete.text.default as string,
         })}
         name={Routes.USER_NAVIGATOR}
         component={UserNavigator}

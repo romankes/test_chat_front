@@ -21,8 +21,6 @@ export function* signUp(action: SignUpAsync): SagaIterator {
 
     yield put(userActions.fetchDetailAsync());
     yield take(userTypes.END_FETCH_DETAIL);
-
-    navigate(Routes.FINISH_SIGN_UP);
   } catch (e) {
     console.log(`error sign up worker ${e}`);
   } finally {

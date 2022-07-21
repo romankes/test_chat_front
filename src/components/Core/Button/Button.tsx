@@ -12,9 +12,9 @@ import {Fonts} from '@/themes';
 
 type TProps = TouchableOpacityProps & {
   children: any;
-  color?: ButtonKeys;
+  color?: keyof ButtonKeys;
   variant?: 'round' | 'square';
-  size?: 'normal';
+  size?: 'normal' | 'small';
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   weight?: keyof typeof Fonts;
@@ -37,7 +37,7 @@ export const Button: FC<TProps> = ({
   rightIcon = null,
   ...props
 }) => {
-  const {styles} = useStyles(color, 14, weight);
+  const {styles} = useStyles({color, weight});
 
   const margins = useMemo(
     () => ({
@@ -51,10 +51,23 @@ export const Button: FC<TProps> = ({
 
   const height = useMemo(() => {
     switch (size) {
+      case 'small':
+        return 36;
       case 'normal':
         return 52;
       default:
         return 52;
+    }
+  }, [size]);
+
+  const fontSize = useMemo(() => {
+    switch (size) {
+      case 'small':
+        return 12;
+      case 'normal':
+        return 16;
+      default:
+        return 16;
     }
   }, [size]);
 
@@ -73,7 +86,7 @@ export const Button: FC<TProps> = ({
       {...props}
       style={[styles.wrapper, {...margins, borderRadius, height}, props.style]}>
       {leftIcon && <View style={styles.leftIconWrapper}>{leftIcon}</View>}
-      <Text style={styles.text}>{children}</Text>
+      <Text style={[styles.text, {fontSize}]}>{children}</Text>
       {rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>}
     </TouchableOpacity>
   );

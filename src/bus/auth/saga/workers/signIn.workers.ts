@@ -25,8 +25,6 @@ export function* signIn(action: SignInAsync): SagaIterator {
       yield put(userActions.fetchDetailAsync());
       yield take(userTypes.END_FETCH_DETAIL);
     }
-
-    navigate(Routes.TABS_NAVIGATOR);
   } catch (e) {
     console.log(`error sign in worker ${e}`);
   } finally {

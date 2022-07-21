@@ -5,7 +5,7 @@ import {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 
 type TArgs = {
-  color: InputKeys;
+  color: keyof InputKeys;
   family: keyof typeof Fonts;
 };
 
@@ -15,18 +15,10 @@ export const useStyles = ({color, family}: TArgs) => {
   const styles = useMemo(
     () =>
       StyleSheet.create({
-        wrapper: {
-          position: 'relative',
-        },
-
         label: {
-          height: 42,
-
           justifyContent: 'center',
+          marginBottom: 8,
           // alignItems: 'center',
-
-          position: 'absolute',
-          left: 8,
         },
 
         fieldWrapper: {

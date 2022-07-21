@@ -1,0 +1,1 @@
+export {InvitesIcon} from './InvitesIcon';
